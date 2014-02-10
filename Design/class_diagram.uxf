@@ -1,53 +1,161 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="12.2">
-  <zoom_level>10</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>80</x>
-      <y>250</y>
-      <w>210</w>
-      <h>190</h>
+      <x>28</x>
+      <y>196</y>
+      <w>175</w>
+      <h>147</h>
     </coordinates>
-    <panel_attributes>&lt;&lt;Stereotype&gt;&gt;
+    <panel_attributes>Player
 Package::BlackJacker
-{Some Properties}
+{A Player class}
 --
--id: Long
-_-ClassAttribute: Long_
+-hand: Hand
 --
-#Operation(i: int): int
-/+AbstractOperation()/
---
-Responsibilities
--- Resp1
-*-- Resp2*</panel_attributes>
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>80</x>
-      <y>80</y>
-      <w>210</w>
-      <h>70</h>
+      <x>301</x>
+      <y>14</y>
+      <w>252</w>
+      <h>133</h>
     </coordinates>
-    <panel_attributes>_object: Hand_
+    <panel_attributes>Card
+Package::BlackJacker
+{A Card class}
 --
-id: Long="36548"
-[waiting for message]</panel_attributes>
+-Value:int
+-Suit:int
+--
++getSuit(): int
++getValue(): int
++suitToString(String: Suit): String
++valueToString(String: Value): String
++toString(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>28</x>
+      <y>14</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>Deck
+Package::BlackJacker
+{A Deck class}
+--
+-maxCards: int
+-deck: ArrayList&lt;Card&gt;
+--
++shuffle(): void
++cardsRemaining(): int
++cardsPlayed(): int
++dealCard(): Card
++addCard(): void
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>90</x>
-      <y>120</y>
-      <w>174</w>
-      <h>150</h>
+      <x>966</x>
+      <y>168</y>
+      <w>140</w>
+      <h>28</h>
     </coordinates>
-    <panel_attributes>lt=&lt;.
-&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
-    <additional_attributes>90;30;90;130</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>21;21;133;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>686</x>
+      <y>7</y>
+      <w>175</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>Hand
+Package::BlackJacker
+{A Hand class}
+--
+-hand: ArrayList&lt;Card&gt;
+--
++clearCards(): void
++removeCard(card: Card): boolean
++addCard(): void
++cardsInHand(): int
++sortBySuite(): void
++sortByValue(): void
++sortCards(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>154</x>
+      <y>35</y>
+      <w>160</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m1=1
+m2=0..n
+Desk of Cards</panel_attributes>
+    <additional_attributes>21;35;147;35</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>532</x>
+      <y>49</y>
+      <w>161</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m1=1
+m2=0..n
+Hand of Cards</panel_attributes>
+    <additional_attributes>154;35;21;35</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>266</x>
+      <y>196</y>
+      <w>175</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>Dealer
+Package::BlackJacker
+{A Dealer class}
+--
+-minimumHandValue: int
+-desk: Desk
+-players: ArrayList&lt;Player&gt;
+-currentPlayer: Player
+--
++getNextPlayer(): Player
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>182</x>
+      <y>252</y>
+      <w>97</w>
+      <h>34</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>84;21;21;21</additional_attributes>
   </element>
 </diagram>
