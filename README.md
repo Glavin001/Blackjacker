@@ -18,7 +18,6 @@ The **Workspace** is this root repository directory.
 
 To develop this application.
 
-
 ### UML Diagram
 
 We use [UMLLet](http://www.umlet.com/) for creating [UML diagrams](http://en.wikipedia.org/wiki/Unified_Modeling_Language).
@@ -27,4 +26,4 @@ Load the UML files in [Design](./Design) directory.
 ## Authors
 
 - Glavin Wiechert <glavin.wiechert@gmail.com> (https://github.com/Glavin001)
-- Faisal K. AlMazroa
+- Faisal K. AlMazroa (https://github.com/FaisalAlMazroa)
