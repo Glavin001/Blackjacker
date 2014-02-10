@@ -1,7 +1,9 @@
 Blackjacker
 ===========
 
-Hack the game of Blackjack!
+> Hack the game of Blackjack!
+
+![blackjack game](http://upload.wikimedia.org/wikipedia/commons/4/4b/Blackjack_board.JPG)
 
 -----
 
@@ -19,7 +21,8 @@ To develop this application.
 
 ### UML Diagram
 
-We use [UMLLet](http://www.umlet.com/) for creating UML diagrams.
+We use [UMLLet](http://www.umlet.com/) for creating [UML diagrams](http://en.wikipedia.org/wiki/Unified_Modeling_Language).
+Load the UML files in [Design](./Design) directory.
 
 ## Authors
 
