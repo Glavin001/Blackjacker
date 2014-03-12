@@ -9,10 +9,8 @@ Blackjacker
 
 ## Installation
 
-Download the [Android Developer Tools](http://developer.android.com/sdk/index.html) and follow Google's instructions.
-
-The **Workspace** is this root repository directory.
-
+Clone this repository.
+Use [Eclipse](https://www.eclipse.org/) to open/[switch to this Workspace](http://help.eclipse.org/juno/index.jsp?topic=%2Forg.eclipse.platform.doc.user%2Freference%2Fref-workspaceswitch.htm), the root repository directory.
 
 ## Contributing
 
@@ -27,3 +25,4 @@ Load the UML files in [Design](./Design) directory.
 
 - Glavin Wiechert <glavin.wiechert@gmail.com> (https://github.com/Glavin001)
 - Faisal K. AlMazroa (https://github.com/FaisalAlMazroa)
+- Dylan Young Meijer (https://github.com/DylanYoung)
