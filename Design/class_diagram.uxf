@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>7</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>539</x>
+      <y>259</y>
+      <w>175</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>Player
+Package::BlackJacker
+{A Player class}
+--
+-hand: Hand
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>392</x>
+      <y>21</y>
+      <w>252</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>Card
+Package::BlackJacker
+{A Card class}
+--
+-Value:int
+-Suit:int
+--
++getSuit(): int
++getValue(): int
++suitToString(String: Suit): String
++valueToString(String: Value): String
++toString(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>28</x>
+      <y>112</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>Deck
+Package::BlackJacker
+{A Deck class}
+--
+-maxCards: int
+-cards: ArrayList&lt;Card&gt;
+--
++shuffle(): void
++cardsRemaining(): int
++cardsPlayed(): int
++dealCard(): Card
++addCard(): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>840</x>
+      <y>112</y>
+      <w>175</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>Hand
+Package::BlackJacker
+{A Hand class}
+--
+-cards: ArrayList&lt;Card&gt;
+--
++clearCards(): void
++removeCard(card: Card): boolean
++addCard(): void
++cardsInHand(): int
++sortBySuite(): void
++sortByValue(): void
++sortCards(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>154</x>
+      <y>14</y>
+      <w>251</w>
+      <h>125</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m1=1
+m2=0..n
+r1=Deck
+r2=Cards
+Desk of Cards</panel_attributes>
+    <additional_attributes>21;112;238;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>623</x>
+      <y>21</y>
+      <w>230</w>
+      <h>125</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m1=1
+m2=0..n
+r1=Hand
+r2=Cards
+Hand of Cards</panel_attributes>
+    <additional_attributes>217;112;21;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>322</x>
+      <y>259</y>
+      <w>175</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>Dealer
+&lt;&lt;Player&gt;&gt;
+Package::BlackJacker
+{A Dealer class}
+--
+-minimumHandValue: int
+-deck: Deck
+-players: ArrayList&lt;Player&gt;
+-currentPlayer: Player
+--
++getNextPlayer(): Player
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>476</x>
+      <y>315</y>
+      <w>76</w>
+      <h>34</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>21;21;63;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>693</x>
+      <y>217</y>
+      <w>160</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m1=1
+m2=1
+r1=Player
+r2=Hand
+Player's Hand</panel_attributes>
+    <additional_attributes>21;119;147;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>154</x>
+      <y>210</y>
+      <w>181</w>
+      <h>146</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m1=1
+m2=1
+r1=Dealer
+r2=Deck
+Dealer's Deck</panel_attributes>
+    <additional_attributes>168;133;21;21</additional_attributes>
+  </element>
+</diagram>
