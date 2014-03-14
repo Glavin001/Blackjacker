@@ -67,11 +67,8 @@ public class Deck {
         {
             shuffle();
         }
-        else
-        {
             maxCards++; // still card left , deal a card and update the deck with the remainning.
             return cards[maxCards - 1];
-        }
 	}
 
 	/**
