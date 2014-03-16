@@ -65,6 +65,9 @@ public class Game implements ActionListener
 		
 		contentPane.setBackground( new Color(10,60,70) );
 
+		//
+		int row = 0;
+		
 		// 
 		Hand dealerHand = dealer.getHand();
 		dealerHand.setBackground( new Color(10,60,70) );
@@ -74,9 +77,12 @@ public class Game implements ActionListener
 		cDealerHand.weightx = 0.0;
 		cDealerHand.gridwidth = 3;
 		cDealerHand.gridx = 0;
-		cDealerHand.gridy = 0;
+		cDealerHand.gridy = row;
 		contentPane.add(dealerHand, cDealerHand);
 
+		// Next line
+		row++;
+		
 		//
 		Hand hand = player.getHand();
 		hand.setBackground( new Color(10,60,70) );
@@ -86,8 +92,11 @@ public class Game implements ActionListener
 		cHand.weightx = 0.0;
 		cHand.gridwidth = 3;
 		cHand.gridx = 0;
-		cHand.gridy = 1;
+		cHand.gridy = row;
 		contentPane.add(hand, cHand);
+				
+		// Next line
+		row++;
 		
 		// 
 		hitButton = new JButton("Hit!");
@@ -96,9 +105,9 @@ public class Game implements ActionListener
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;
 		c.gridx = 0;
-		c.gridy = 2;
+		c.gridy = row;
 		contentPane.add(hitButton, c);
-
+		
 		// 
 		standButton = new JButton("Stand!");
 		standButton.setActionCommand("stand");
@@ -106,7 +115,7 @@ public class Game implements ActionListener
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;
 		c.gridx = 1;
-		c.gridy = 2;
+		c.gridy = row;
 		contentPane.add(standButton, c);
 
 		dealer.dealCardToPlayer(dealer,	false);

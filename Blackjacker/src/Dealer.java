@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import javax.swing.Box;
+
 /**
  * @author Glavin Wiechert
  *
@@ -64,6 +66,8 @@ public class Dealer extends Player
 	public void setDeck(Deck newDeck)
 	{
 		deck = newDeck;
+		this.getHand().add(deck);
+		this.getHand().add(Box.createHorizontalStrut(10)); // Fixed width invisible separator.
 	}
 	
 }

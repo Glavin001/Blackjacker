@@ -235,7 +235,7 @@ public class Card extends JComponent
         // Draw background
         g2.setColor(Color.WHITE);
         Rectangle r = new Rectangle(0, 0, this.getSize().width, this.getSize().height);
-        System.out.println(r);
+        //System.out.println(r);
         g2.fill(r);
         
         if (this.isFolded())
