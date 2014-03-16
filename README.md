@@ -3,7 +3,7 @@ Blackjacker
 
 > Hack the game of Blackjack!
 
-![blackjack game](http://upload.wikimedia.org/wikipedia/commons/4/4b/Blackjack_board.JPG)
+![blackjack game](Screenshots/basic_v1.png)
 
 -----
 
@@ -11,6 +11,10 @@ Blackjacker
 
 Clone this repository.
 Use [Eclipse](https://www.eclipse.org/) to open/[switch to this Workspace](http://help.eclipse.org/juno/index.jsp?topic=%2Forg.eclipse.platform.doc.user%2Freference%2Fref-workspaceswitch.htm), the root repository directory.
+
+## Documentation
+
+See [Documentation/ directory](Documentation/).
 
 ## Contributing
 
