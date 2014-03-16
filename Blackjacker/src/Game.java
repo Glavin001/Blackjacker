@@ -131,6 +131,26 @@ public class Game implements ActionListener
 		c.gridy = row;
 		contentPane.add(restartButton, c);
 
+		//
+		JButton sortBySuit = new JButton("Sort by Suit");
+		sortBySuit.setActionCommand("sortBySuit");
+		sortBySuit.addActionListener(this);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 0.5;
+		c.gridx = 3;
+		c.gridy = row;
+		contentPane.add(sortBySuit, c);
+
+		JButton sortByValue = new JButton("Sort by Value");
+		sortByValue.setActionCommand("sortByValue");
+		sortByValue.addActionListener(this);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 0.5;
+		c.gridx = 4;
+		c.gridy = row;
+		contentPane.add(sortByValue, c);
+
+		
 		// Display the window.
 		frame.setSize(600, 600);
 		frame.setResizable(true);
@@ -167,6 +187,17 @@ public class Game implements ActionListener
 			restartGame();
 			
 		}
+		else if ("sortByValue".equals(e.getActionCommand()))
+		{
+			// 
+			player.getHand().sortByValue();
+			
+		}
+		else if ("sortBySuit".equals(e.getActionCommand()))
+		{
+			// 
+			player.getHand().sortBySuit();
+		}
 		else
 		{
 			
@@ -195,7 +226,8 @@ public class Game implements ActionListener
 
 		//
 		
-		
 	}
+	
+	
 	
 }

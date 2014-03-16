@@ -79,7 +79,7 @@ public class Hand extends JPanel
     /**
      *
      */
-    public void sortBySuite()
+    public void sortBySuit()
     {
 
         ArrayList<Card> temp = new ArrayList<Card>();
@@ -103,6 +103,9 @@ public class Hand extends JPanel
             temp.add(tempCard);
         }
         cards = temp;
+        
+        // Display cards in new order
+        forceRefresh();
     }
 
     /**
@@ -131,8 +134,27 @@ public class Hand extends JPanel
             temp.add(tempCard);
         }
         cards = temp;
+        
+        // Display cards in new order
+        forceRefresh();
     }
 
+    /**
+     * 
+     */
+    public void forceRefresh()
+    {
+    	// Remove cards
+    	this.removeAll();
+    	// Re-add all cards
+    	for (Card card : cards)
+    	{
+    		this.add(card);
+    	}
+        this.revalidate();
+        repaint();
+    }
+    
     /**
      * we do not need this because sorting both the values and suit will sort all the cards !!=
     public void sortCards()
