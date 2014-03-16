@@ -81,6 +81,11 @@ public class Deck extends JComponent
 	 */
 	public void shuffle()
 	{
+		// Flip all cards to face down
+		for (Card c : cards)
+		{
+			c.fold();
+		}
         List<Card> list =  Arrays.asList(cards); //move it temporary to a list.
         Collections.shuffle(list); // shuffle the cards
         list.toArray(cards); // return it back to the original deck after shuffling

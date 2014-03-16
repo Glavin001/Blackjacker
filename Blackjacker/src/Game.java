@@ -41,17 +41,19 @@ public class Game implements ActionListener
 	 * 
 	 */
 	private JButton standButton;
+	/**
+	 * 
+	 */
+	private JButton restartButton;
 	
 	/**
 	 * 
 	 */
 	public Game () 
 	{
-		// 
+		// Initialize
 		deck = new Deck();
 		dealer = new Dealer();
-		deck.shuffle();
-		dealer.setDeck(deck);
 		player = new Player();
 		
 		// Setup
@@ -118,18 +120,25 @@ public class Game implements ActionListener
 		c.gridy = row;
 		contentPane.add(standButton, c);
 
-		dealer.dealCardToPlayer(dealer,	false);
-		dealer.dealCardToPlayer(dealer,	true);
 		
-		dealer.dealCardToPlayer(player,	true);
-		dealer.dealCardToPlayer(player,	true);
-		
+		// 
+		restartButton = new JButton("Restart");
+		restartButton.setActionCommand("restart");
+		restartButton.addActionListener(this);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 0.5;
+		c.gridx = 2;
+		c.gridy = row;
+		contentPane.add(restartButton, c);
+
 		// Display the window.
 		frame.setSize(600, 600);
 		frame.setResizable(true);
 		//frame.pack();
 		frame.setVisible(true);
 
+		restartGame(); // Starts the game for the first time.
+		
 	}
 
 	/**
@@ -152,10 +161,41 @@ public class Game implements ActionListener
 			// 
 			
 		}
+		else if ("restart".equals(e.getActionCommand()))
+		{
+			// 
+			restartGame();
+			
+		}
 		else
 		{
 			
 		}
 	}
 		
+	/**
+	 * 
+	 */
+	public void restartGame()
+	{
+		// Clear Hands
+		dealer.getHand().clearCards();
+		player.getHand().clearCards();
+		
+		// Shuffle Deck 
+		dealer.setDeck(deck);
+		deck.shuffle();
+		
+		// Deal to players
+		dealer.dealCardToPlayer(dealer,	false);
+		dealer.dealCardToPlayer(dealer,	true);
+		
+		dealer.dealCardToPlayer(player,	true);
+		dealer.dealCardToPlayer(player,	true);
+
+		//
+		
+		
+	}
+	
 }

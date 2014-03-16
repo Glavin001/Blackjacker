@@ -37,6 +37,8 @@ public class Hand extends JPanel
     public void clearCards()
     {
         cards.clear();
+        this.removeAll();
+        repaint();
     }
 
     /**
