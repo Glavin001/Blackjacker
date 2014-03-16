@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 /**
  * @author Glavin Wiechert
@@ -45,6 +46,10 @@ public class Game implements ActionListener
 	 * 
 	 */
 	private JButton restartButton;
+	/**
+	 * Displays a message about this game.
+	 */
+	private JLabel messageLabel;
 	
 	/**
 	 * 
@@ -69,6 +74,20 @@ public class Game implements ActionListener
 
 		//
 		int row = 0;
+		
+		//
+		messageLabel = new JLabel("");
+		messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		messageLabel.setForeground(Color.WHITE);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 0.5;
+		c.gridwidth = 5;
+		c.gridx = 0;
+		c.gridy = row;
+		contentPane.add(messageLabel, c);
+		
+		// Next line
+		row++;
 		
 		// 
 		Hand dealerHand = dealer.getHand();
@@ -106,6 +125,7 @@ public class Game implements ActionListener
 		hitButton.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;
+		c.gridwidth = 1;
 		c.gridx = 0;
 		c.gridy = row;
 		contentPane.add(hitButton, c);
@@ -116,6 +136,7 @@ public class Game implements ActionListener
 		standButton.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;
+		c.gridwidth = 1;
 		c.gridx = 1;
 		c.gridy = row;
 		contentPane.add(standButton, c);
@@ -126,6 +147,7 @@ public class Game implements ActionListener
 		restartButton.setActionCommand("restart");
 		restartButton.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridwidth = 1;
 		c.weightx = 0.5;
 		c.gridx = 2;
 		c.gridy = row;
@@ -136,6 +158,7 @@ public class Game implements ActionListener
 		sortBySuit.setActionCommand("sortBySuit");
 		sortBySuit.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridwidth = 1;
 		c.weightx = 0.5;
 		c.gridx = 3;
 		c.gridy = row;
@@ -145,6 +168,7 @@ public class Game implements ActionListener
 		sortByValue.setActionCommand("sortByValue");
 		sortByValue.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridwidth = 1;
 		c.weightx = 0.5;
 		c.gridx = 4;
 		c.gridy = row;
@@ -183,16 +207,19 @@ public class Game implements ActionListener
 			if (handValue == 21)
 			{
 				System.out.println("Blackjack! You win!");
+				setMessage("Blackjack! You win!");
 			}
 			// == Bust
 			else if (handValue > 21)
 			{
 				System.out.println("You busted!");
+				setMessage("You busted! Your hand is "+handValue+".");
 			}
 			// == Else: good for another hit/stand
 			else
 			{
 				System.out.println("Another go?");
+				setMessage("You are at "+handValue+". Another go?");
 			}
 			
 		}
@@ -200,7 +227,32 @@ public class Game implements ActionListener
 		{
 			// Next player's turn
 			// The Dealer's turn
+			setMessage("Dealers turn.");
 			dealer.makeMoves();
+			//
+			Hand hand = dealer.getHand();
+			// Check if Dealer:
+			int handValue = hand.getValue();
+			System.out.println("Hand: "+handValue);
+			// == 21
+			if (handValue == 21)
+			{
+				System.out.println("Blackjack! Dealer wins!");
+				setMessage("Blackjack! Dealer wins!");
+			}
+			// == Bust
+			else if (handValue > 21)
+			{
+				System.out.println("Dealer busted!");
+				setMessage("Dealer busted! Dealer's hand is "+handValue+".");
+			}
+			// == Else: good for another hit/stand
+			else
+			{
+				System.out.println("Another go, Dealer?");
+				setMessage("Dealer is at "+handValue+".");
+			}
+			
 		}
 		else if ("restart".equals(e.getActionCommand()))
 		{
@@ -246,9 +298,17 @@ public class Game implements ActionListener
 		dealer.dealCardToPlayer(player,	true);
 
 		//
+		setMessage("Your turn.");
 		
 	}
 	
-	
+	/**
+	 * 
+	 * @param msg
+	 */
+	public void setMessage(String msg)
+	{
+		messageLabel.setText(msg);
+	}
 	
 }
