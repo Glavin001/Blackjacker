@@ -92,7 +92,13 @@ public class Card extends JComponent
      */
     public int getValue()
     {
-        return value;
+    	// See issue #8
+    	if (value == JACK 
+    			|| value == QUEEN 
+    			|| value == KING)
+    		return 10;
+
+    	return value;
     }
 
     /**
@@ -232,19 +238,33 @@ public class Card extends JComponent
         //System.out.println("Displaying: "+this.toString());
         //System.out.println(this.getBounds());
         
-        // Draw background
-        g2.setColor(Color.WHITE);
-        Rectangle r = new Rectangle(0, 0, this.getSize().width, this.getSize().height);
-        //System.out.println(r);
-        g2.fill(r);
-        
         if (this.isFolded())
         {
         	// Face down and hidden to players
-        	
+
+            // Draw background
+            g2.setColor(Color.RED);
+            Rectangle r = new Rectangle(0, 0, this.getSize().width, this.getSize().height);
+            //System.out.println(r);
+            g2.fill(r);
+            
+        	// Face up to players
+            g2.setColor(Color.BLACK);
+            FontMetrics fm = g.getFontMetrics();
+            String str = "*Face Down*";
+            // Draw message
+            g2.drawString(str, this.getWidth()/2 - fm.stringWidth(str)/2, this.getHeight()/2);
+            
         }
         else
         {
+
+            // Draw background
+            g2.setColor(Color.WHITE);
+            Rectangle r = new Rectangle(0, 0, this.getSize().width, this.getSize().height);
+            //System.out.println(r);
+            g2.fill(r);
+            
         	// Face up to players
             g2.setColor(Color.BLACK);
             FontMetrics fm = g.getFontMetrics();

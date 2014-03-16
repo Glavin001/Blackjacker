@@ -77,7 +77,7 @@ public class Game implements ActionListener
 		cDealerHand.fill = GridBagConstraints.HORIZONTAL;
 		cDealerHand.ipady = 40;      //make this component tall
 		cDealerHand.weightx = 0.0;
-		cDealerHand.gridwidth = 3;
+		cDealerHand.gridwidth = 5;
 		cDealerHand.gridx = 0;
 		cDealerHand.gridy = row;
 		contentPane.add(dealerHand, cDealerHand);
@@ -92,7 +92,7 @@ public class Game implements ActionListener
 		cHand.fill = GridBagConstraints.HORIZONTAL;
 		cHand.ipady = 60;      //make this component tall
 		cHand.weightx = 0.0;
-		cHand.gridwidth = 3;
+		cHand.gridwidth = 5;
 		cHand.gridx = 0;
 		cHand.gridy = row;
 		contentPane.add(hand, cHand);
@@ -171,15 +171,36 @@ public class Game implements ActionListener
 		// 
 		if ("hit".equals(e.getActionCommand()))
 		{
-			// 
+			// Deal new card to player
 			Card newCard = deck.dealCard();
 			newCard.unfold();
-			player.getHand().addCard(newCard);
+			Hand hand = player.getHand();
+			hand.addCard(newCard);
+			// Check if Player:
+			int handValue = hand.getValue();
+			System.out.println("Hand: "+handValue);
+			// == 21
+			if (handValue == 21)
+			{
+				System.out.println("Blackjack! You win!");
+			}
+			// == Bust
+			else if (handValue > 21)
+			{
+				System.out.println("You busted!");
+			}
+			// == Else: good for another hit/stand
+			else
+			{
+				System.out.println("Another go?");
+			}
+			
 		}
 		else if ("stand".equals(e.getActionCommand()))
 		{
-			// 
-			
+			// Next player's turn
+			// The Dealer's turn
+			dealer.makeMoves();
 		}
 		else if ("restart".equals(e.getActionCommand()))
 		{
@@ -200,7 +221,7 @@ public class Game implements ActionListener
 		}
 		else
 		{
-			
+			System.out.println("Unknown action: "+e.getActionCommand());
 		}
 	}
 		

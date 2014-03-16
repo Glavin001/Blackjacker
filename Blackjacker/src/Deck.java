@@ -143,7 +143,7 @@ public class Deck extends JComponent
         super.paintComponent(g);  
         
         // Draw background
-        g2.setColor(Color.WHITE);
+        g2.setColor(Color.RED);
         Rectangle r = new Rectangle(0, 0, this.getSize().width, this.getSize().height);
         //System.out.println(r);
         g2.fill(r);

@@ -179,6 +179,19 @@ public class Hand extends JPanel
     /**
      * 
      */
+    public void showAllCards()
+    {
+    	// Flip all cards to face up
+		for (Card c : cards)
+		{
+			c.unfold();
+		}
+		repaint();
+    }
+    
+    /**
+     * 
+     */
     public void paint(Graphics g)
     {
     	System.out.println("Paint Hand");

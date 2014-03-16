@@ -70,4 +70,34 @@ public class Dealer extends Player
 		this.getHand().add(Box.createHorizontalStrut(10)); // Fixed width invisible separator.
 	}
 	
+	/**
+	 * Dealer makes it's moves.
+	 */
+	public void makeMoves()
+	{
+		Hand hand = this.getHand();
+		hand.showAllCards();
+		
+		int minVal = 17;
+		while (hand.getValue() < 17)
+		{
+			// Hit
+			dealCardToPlayer(this, true);
+			// Check if Blackjack (21)
+			if (hand.getValue() == 21)
+			{
+				System.out.println("BLACKJACK! Dealer wins");
+				return;
+			}
+			// Check if Bust
+			else if (hand.getValue() > 21)
+			{
+				System.out.println("Busted. Dealer loses.");
+				return;
+			}
+		}
+		// Stand
+		System.out.println("Dealer stands.");
+	}
+	
 }
