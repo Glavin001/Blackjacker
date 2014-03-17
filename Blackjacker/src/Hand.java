@@ -171,10 +171,12 @@ public class Hand extends JPanel
     	int total = 0;
     	for (Card c : cards)
     	{
-    		total += c.getValue();
+    		if (! c.isFolded() )
+    			total += c.getValue();
     	}
     	return total;
     }
+    
     
     /**
      * 
