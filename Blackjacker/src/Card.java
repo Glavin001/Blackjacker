@@ -4,7 +4,10 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.net.URL;
 
+import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
 /**
@@ -161,7 +164,7 @@ public class Card extends JComponent
              * 
              * @return the String value of each card depending of the code (number-value).
              */
-            public String valueToString()
+    public String valueToString()
     {
 
         if (value == 1)
@@ -234,6 +237,64 @@ public class Card extends JComponent
     /**
      * 
      */
+    private BufferedImage getImage()
+    {
+    	String path = "rsrc/Images/";
+    	switch (value)
+    	{
+    	case 2:
+    	case 3:
+    	case 4:
+    	case 5:
+    	case 6:
+    	case 7:
+    	case 8:
+    	case 9:
+    	case 10:
+    		path += value;
+    		break;
+    	case 11: 
+    		path += "J";
+    		break;
+    	case 12:
+    		path += "Q";
+    		break;
+    	case 13:
+    		path += "K";
+    		break;
+    	case 1:
+    		path += "A";
+    	}
+    	switch (suit)
+    	{
+    	case SPADES:
+    		path += "S";
+    		break;
+    	case HEARTS:
+    		path += "H";
+    		break;
+    	case DIAMONDS:
+    		path += "D";
+    		break;
+    	case CLUBS:
+    		path += "C";
+    		break;
+    	}
+    	path += ".png";
+    	
+    	URL resource = getClass().getResource(path);
+    	System.out.println(path);
+    	
+    	try
+    	{
+    		return ImageIO.read(resource);
+    	}
+    	catch (Exception e)
+    	{
+    		return null; 
+    	}
+    }
+    
     public void paintComponent(Graphics g) 
     {
         Graphics2D g2 = (Graphics2D) g;
@@ -245,7 +306,7 @@ public class Card extends JComponent
         {
         	// Face down and hidden to players
 
-            // Draw background
+   /*         // Draw background
             g2.setColor(Color.RED);
             Rectangle r = new Rectangle(0, 0, this.getSize().width, this.getSize().height);
             //System.out.println(r);
@@ -256,12 +317,25 @@ public class Card extends JComponent
             FontMetrics fm = g.getFontMetrics();
             String str = "*Face Down*";
             // Draw message
-            g2.drawString(str, this.getWidth()/2 - fm.stringWidth(str)/2, this.getHeight()/2);
-            
+            g2.drawString(str, this.getWidth()/2 - fm.stringWidth(str)/2, this.getHeight()/2);*/
+        	URL resource = getClass().getResource("rsrc/Images/back.png");
+        	BufferedImage bg;
+        	try
+        	{
+        		bg = ImageIO.read(resource);
+        	}
+        	catch (Exception e)
+        	{
+        		bg = null; 
+        	}
+        	
+            g2.drawImage(bg, 0, 0, this.getWidth(), this.getHeight(),
+            		0, 0, bg.getWidth(), bg.getHeight(),
+            		this);
         }
         else
         {
-
+/*
             // Draw background
             g2.setColor(Color.WHITE);
             Rectangle r = new Rectangle(0, 0, this.getSize().width, this.getSize().height);
@@ -277,8 +351,11 @@ public class Card extends JComponent
             g2.drawString(valStr, fm.getHeight(), fm.getHeight());
             g2.drawString(valStr, this.getWidth() - fm.stringWidth(valStr) - fm.getHeight(), this.getHeight() - fm.getHeight());
             // Draw Suit
-            g2.drawString(suitStr, this.getWidth()/2 - fm.stringWidth(suitStr)/2, this.getHeight()/2);
-            
+            g2.drawString(suitStr, this.getWidth()/2 - fm.stringWidth(suitStr)/2, this.getHeight()/2);*/
+            BufferedImage card = getImage();
+        	g2.drawImage(card, 0, 0, this.getWidth(), this.getHeight(),
+            		0, 0, card.getWidth(), card.getHeight(),
+            		this);
         }        
     }
 
