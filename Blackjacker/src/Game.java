@@ -237,6 +237,7 @@ public class Game implements ActionListener
 		frame.setResizable(true);
 		//frame.pack();
 		frame.setVisible(true);
+		frame.setResizable(false);
 		
 
 		resetGame(); // Starts the game for the first time.
