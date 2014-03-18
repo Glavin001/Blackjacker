@@ -99,5 +99,32 @@ public class Dealer extends Player
 		// Stand
 		System.out.println("Dealer stands.");
 	}
+	public void makeMoves(int value)
+	{
+		Hand hand = this.getHand();
+		hand.showAllCards();
+		
+		int minVal = 17;
+		while (hand.getValue() < 17 || hand.getValue() < value)
+		{
+			// Hit
+			dealCardToPlayer(this, true);
+			// Check if Blackjack (21)
+			if (hand.getValue() == 21)
+			{
+				System.out.println("BLACKJACK! Dealer wins");
+				return;
+			}
+			// Check if Bust
+			else if (hand.getValue() > 21)
+			{
+				System.out.println("Busted. Dealer loses.");
+				return;
+			}
+		}
+		// Stand
+		System.out.println("Dealer stands.");
+	}
+	
 	
 }
