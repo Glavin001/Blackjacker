@@ -49,7 +49,15 @@ public class Game implements ActionListener
 	/**
 	 * Displays a message about this game.
 	 */
-	private JLabel messageLabel;
+	private JLabel dealerLabel;
+	
+	/**
+	 * Displays a message about this game.
+	 */
+	private JLabel playerLabel;
+	
+	private JLabel prompt;
+	
 	
 	/**
 	 * 
@@ -76,15 +84,15 @@ public class Game implements ActionListener
 		int row = 0;
 		
 		//
-		messageLabel = new JLabel("");
-		messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		messageLabel.setForeground(Color.WHITE);
+		prompt = new JLabel("");
+		prompt.setHorizontalAlignment(SwingConstants.CENTER);
+		prompt.setForeground(Color.WHITE);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;
 		c.gridwidth = 5;
 		c.gridx = 0;
 		c.gridy = row;
-		contentPane.add(messageLabel, c);
+		contentPane.add(prompt, c);
 		
 		// Next line
 		row++;
@@ -105,6 +113,19 @@ public class Game implements ActionListener
 		row++;
 		
 		//
+		dealerLabel = new JLabel("");
+		dealerLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		dealerLabel.setForeground(Color.WHITE);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 0.5;
+		c.gridwidth = 5;
+		c.gridx = 0;
+		c.gridy = row;
+		contentPane.add(dealerLabel, c);
+		
+		row++;
+		
+		//
 		Hand hand = player.getHand();
 		hand.setBackground( new Color(10,60,70) );
 		GridBagConstraints cHand = new GridBagConstraints();
@@ -117,6 +138,19 @@ public class Game implements ActionListener
 		contentPane.add(hand, cHand);
 				
 		// Next line
+		row++;
+		
+		// 
+		playerLabel = new JLabel("");
+		playerLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		playerLabel.setForeground(Color.WHITE);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 0.5;
+		c.gridwidth = 5;
+		c.gridx = 0;
+		c.gridy = row;
+		contentPane.add(playerLabel, c);
+		
 		row++;
 		
 		// 
@@ -195,96 +229,81 @@ public class Game implements ActionListener
 		// 
 		if ("hit".equals(e.getActionCommand()))
 		{
-			// Deal new card to player
-			Card newCard = deck.dealCard();
-			newCard.unfold();
-			Hand hand = player.getHand();
-			hand.addCard(newCard);
-			// Check if Player:
-			int handValue = hand.getValue();
-			System.out.println("Hand: "+handValue);
-			// == 21
-			if (handValue == 21)
-			{
-				System.out.println("Blackjack! You win!");
-				setMessage("Blackjack! You win!");
-			}
-			// == Bust
-			else if (handValue > 21)
-			{
-				System.out.println("You busted!");
-				setMessage("You busted! Your hand is "+handValue+".");
-			}
-			// == Else: good for another hit/stand
+			hitPlayer();
+			if (player.getHand().getValue() >= 21)
+				moveDealer();
 			else
 			{
-				System.out.println("Another go?");
-				setMessage("You are at "+handValue+". Another go?");
+				System.out.println("Hit or Stand?");
+				setPrompt("Player's Turn: Hit or Stand?");
 			}
-			
 		}
 		else if ("stand".equals(e.getActionCommand()))
-		{
-			// Next player's turn
-			// The Dealer's turn
-			setMessage("Dealers turn.");
-			dealer.makeMoves();
-			//
-			Hand hand = dealer.getHand();
-			// Check if Dealer:
-			int handValue = hand.getValue();
-			System.out.println("Hand: "+handValue);
-			// == 21
-			if (handValue == 21)
-			{
-				System.out.println("Blackjack! Dealer wins!");
-				setMessage("Blackjack! Dealer wins!");
-			}
-			// == Bust
-			else if (handValue > 21)
-			{
-				System.out.println("Dealer busted!");
-				setMessage("Dealer busted! Dealer's hand is "+handValue+".");
-			}
-			// == Else: good for another hit/stand
-			else
-			{
-				System.out.println("Another go, Dealer?");
-				setMessage("Dealer is at "+handValue+".");
-			}
-			
-		}
+			moveDealer();			
 		else if ("restart".equals(e.getActionCommand()))
-		{
-			// 
 			restartGame();
-			
-		}
 		else if ("sortByValue".equals(e.getActionCommand()))
-		{
-			// 
 			player.getHand().sortByValue();
-			
-		}
 		else if ("sortBySuit".equals(e.getActionCommand()))
-		{
-			// 
 			player.getHand().sortBySuit();
-		}
 		else
-		{
 			System.out.println("Unknown action: "+e.getActionCommand());
-		}
 	}
+	
+	public void hitPlayer()
+	{
+		// Deal new card to player
+		Card newCard = deck.dealCard();
+		newCard.unfold();
+		Hand hand = player.getHand();
+		hand.addCard(newCard);
 		
+			if (hand.isBlackJack())
+				setPlayerMessage("Blackjack!");
+			else if (hand.isBust())
+				setPlayerMessage("Player busted! Player's Hand:  "+ hand.getValue());
+			else 
+				setPlayerMessage("Player's Hand:  "+ hand.getValue());
+		
+	}
+	
+	public void moveDealer()
+	{
+		// Player's turn is over
+		hitButton.setEnabled(false);
+		standButton.setEnabled(false);
+		
+		// Next player's turn
+		// The Dealer's turn
+		setPrompt("Dealer's turn.");
+		dealer.makeMoves(player.getHand().getValue());
+		Hand hand = dealer.getHand();
+		
+		// Set Dealer Message
+		if (hand.isBlackJack())
+			setDealerMessage("Blackjack!");
+		else if (hand.isBust())
+			setDealerMessage( "Dealer busted! Dealer's Hand: " + hand.getValue() );
+		else 
+			setDealerMessage( "Dealer's Hand: " + hand.getValue());
+				
+		resolveGame();
+	}
+	
 	/**
 	 * 
 	 */
 	public void restartGame()
 	{
+		
 		// Clear Hands
 		dealer.getHand().clearCards();
 		player.getHand().clearCards();
+		
+		// Enable Play Buttons
+		hitButton.setEnabled(true);
+		standButton.setEnabled(true);
+		
 		
 		// Shuffle Deck 
 		dealer.setDeck(deck);
@@ -293,12 +312,26 @@ public class Game implements ActionListener
 		// Deal to players
 		dealer.dealCardToPlayer(dealer,	false);
 		dealer.dealCardToPlayer(dealer,	true);
+		setDealerMessage("Dealer's Hand: " + dealer.getHand().getValue());
 		
 		dealer.dealCardToPlayer(player,	true);
 		dealer.dealCardToPlayer(player,	true);
-
+		
+		if (player.getHand().isBlackJack()) 
+		{
+			setPlayerMessage("Player's Hand: BlackJack!");
+			moveDealer();
+		}
+		else
+		{
+			setPrompt("Player's turn.");
+			setPlayerMessage("Player's Hand: " + player.getHand().getValue());
+			
+		}
 		//
-		setMessage("Your turn.");
+		
+
+		
 		
 	}
 	
@@ -306,9 +339,47 @@ public class Game implements ActionListener
 	 * 
 	 * @param msg
 	 */
-	public void setMessage(String msg)
+	public void setDealerMessage(String msg)
 	{
-		messageLabel.setText(msg);
+		dealerLabel.setText(msg);
 	}
+	
+	public void setPlayerMessage(String msg)
+	{
+		playerLabel.setText(msg);
+	}
+	
+	public void setPrompt(String msg)
+	{
+		prompt.setText(msg);
+	}
+	
+	public void resolveGame()
+	{
+		// Get the hands to compare
+		Hand dHand = dealer.getHand();
+		Hand pHand = player.getHand();
+		
+		// Helper conditions
+		boolean handsEqual = ( dHand.getValue() == pHand.getValue() );
+		boolean bothBust = dHand.isBust() && pHand.isBust();
+		boolean bothBlackJack = dHand.isBlackJack() && pHand.isBlackJack();
+		boolean neitherBlackJack = !dHand.isBlackJack() && !pHand.isBlackJack();
+		
+		// Define the push and win conditions
+		boolean isPush = bothBust || bothBlackJack || (handsEqual && neitherBlackJack);
+		boolean isWin = !pHand.isBust() && (pHand.getValue() > dHand.getValue()
+				|| ( pHand.isBlackJack() && !dHand.isBlackJack() ) || dHand.isBust() );
+		
+		// Display the appropriate message
+		if (isPush)
+			setPrompt("Push! Draw Game");
+		else if (isWin)
+			setPrompt("Player Wins!");
+		else
+			setPrompt("Dealer Wins!");			
+	}
+	
+	
 	
 }
