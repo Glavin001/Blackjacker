@@ -302,7 +302,11 @@ public class Game implements ActionListener
 		// Next player's turn
 		// The Dealer's turn
 		setPrompt("Dealer's turn.");
-		dealer.makeMoves(player.getHand().getValue());
+		if (player.getHand().isBust())
+			dealer.makeMoves();
+		else
+			dealer.makeMoves(player.getHand().getValue());
+		
 		Hand hand = dealer.getHand();
 		
 		// Set Dealer Message

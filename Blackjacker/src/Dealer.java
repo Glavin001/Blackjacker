@@ -105,7 +105,7 @@ public class Dealer extends Player
 		hand.showAllCards();
 		
 		int minVal = 17;
-		while (hand.getValue() < 17 || hand.getValue() < value)
+		while (hand.getValue() < 17 || (hand.getValue() < value) )
 		{
 			// Hit
 			dealCardToPlayer(this, true);
