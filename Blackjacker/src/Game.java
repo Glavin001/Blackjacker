@@ -46,16 +46,22 @@ public class Game implements ActionListener
 	 * 
 	 */
 	private JButton restartButton;
+	
+	private JButton reshuffleButton;
+	
 	/**
-	 * Displays a message about this game.
+	 * Displays dealer hand value
 	 */
 	private JLabel dealerLabel;
 	
 	/**
-	 * Displays a message about this game.
+	 * Displays player hand value
 	 */
 	private JLabel playerLabel;
 	
+	/**
+	 * Displays a message about this game.
+	 */
 	private JLabel prompt;
 	
 	
@@ -84,15 +90,16 @@ public class Game implements ActionListener
 		int row = 0;
 		
 		//
-		prompt = new JLabel("");
-		prompt.setHorizontalAlignment(SwingConstants.CENTER);
-		prompt.setForeground(Color.WHITE);
+		dealerLabel = new JLabel("");
+		dealerLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		dealerLabel.setForeground(Color.WHITE);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;
 		c.gridwidth = 5;
 		c.gridx = 0;
 		c.gridy = row;
-		contentPane.add(prompt, c);
+		contentPane.add(dealerLabel, c);
+
 		
 		// Next line
 		row++;
@@ -113,15 +120,16 @@ public class Game implements ActionListener
 		row++;
 		
 		//
-		dealerLabel = new JLabel("");
-		dealerLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		dealerLabel.setForeground(Color.WHITE);
+		playerLabel = new JLabel("");
+		playerLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		playerLabel.setForeground(Color.WHITE);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;
 		c.gridwidth = 5;
 		c.gridx = 0;
 		c.gridy = row;
-		contentPane.add(dealerLabel, c);
+		contentPane.add(playerLabel, c);
+
 		
 		row++;
 		
@@ -141,15 +149,16 @@ public class Game implements ActionListener
 		row++;
 		
 		// 
-		playerLabel = new JLabel("");
-		playerLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		playerLabel.setForeground(Color.WHITE);
+		prompt = new JLabel("");
+		prompt.setHorizontalAlignment(SwingConstants.CENTER);
+		prompt.setForeground(Color.WHITE);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;
 		c.gridwidth = 5;
 		c.gridx = 0;
 		c.gridy = row;
-		contentPane.add(playerLabel, c);
+		contentPane.add(prompt, c);
+
 		
 		row++;
 		
@@ -177,7 +186,8 @@ public class Game implements ActionListener
 
 		
 		// 
-		restartButton = new JButton("Restart");
+		
+		restartButton = new JButton("Play Again");
 		restartButton.setActionCommand("restart");
 		restartButton.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -186,9 +196,22 @@ public class Game implements ActionListener
 		c.gridx = 2;
 		c.gridy = row;
 		contentPane.add(restartButton, c);
+		
+		
+		reshuffleButton = new JButton("ReShuffle");
+		reshuffleButton.setActionCommand("reshuffle");
+		reshuffleButton.addActionListener(this);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridwidth = 1;
+		c.weightx = 0.5;
+		c.gridx = 3;
+		c.gridy = row;
+		contentPane.add(reshuffleButton, c);
+		
+		
 
 		//
-		JButton sortBySuit = new JButton("Sort by Suit");
+/*		JButton sortBySuit = new JButton("Sort by Suit");
 		sortBySuit.setActionCommand("sortBySuit");
 		sortBySuit.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -206,16 +229,17 @@ public class Game implements ActionListener
 		c.weightx = 0.5;
 		c.gridx = 4;
 		c.gridy = row;
-		contentPane.add(sortByValue, c);
+		contentPane.add(sortByValue, c);*/
 
 		
 		// Display the window.
-		frame.setSize(600, 600);
+		frame.setSize(1000, 600);
 		frame.setResizable(true);
 		//frame.pack();
 		frame.setVisible(true);
+		
 
-		restartGame(); // Starts the game for the first time.
+		resetGame(); // Starts the game for the first time.
 		
 	}
 
@@ -241,7 +265,9 @@ public class Game implements ActionListener
 		else if ("stand".equals(e.getActionCommand()))
 			moveDealer();			
 		else if ("restart".equals(e.getActionCommand()))
-			restartGame();
+			playAgain();
+		else if ("reshuffle".equals(e.getActionCommand()))
+			resetGame();
 		else if ("sortByValue".equals(e.getActionCommand()))
 			player.getHand().sortByValue();
 		else if ("sortBySuit".equals(e.getActionCommand()))
@@ -290,10 +316,16 @@ public class Game implements ActionListener
 		resolveGame();
 	}
 	
+	public void resetGame()
+	{
+		deck.shuffle();
+		playAgain();
+	}
+	
 	/**
 	 * 
 	 */
-	public void restartGame()
+	public void playAgain()
 	{
 		
 		// Clear Hands
@@ -307,7 +339,10 @@ public class Game implements ActionListener
 		
 		// Shuffle Deck 
 		dealer.setDeck(deck);
-		deck.shuffle();
+		
+		// Temporary fix for shuffling active cards
+		if (deck.cardsRemaining() < 20)
+			deck.shuffle();
 		
 		// Deal to players
 		dealer.dealCardToPlayer(dealer,	false);
