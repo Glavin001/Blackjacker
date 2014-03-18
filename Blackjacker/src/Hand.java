@@ -169,12 +169,46 @@ public class Hand extends JPanel
     public int getValue()
     {
     	int total = 0;
+    	int altTotal = 0;
     	for (Card c : cards)
     	{
     		if (! c.isFolded() )
-    			total += c.getValue();
+    			if (c.getValue() == -1)
+    			{
+    				total += 1;
+    				altTotal += 11;
+    			}
+    			else
+    			{
+    				total += c.getValue();
+    				altTotal += c.getValue();
+    			}
     	}
-    	return total;
+    	if (total <= 21 && altTotal <= 21)
+    		return max(total, altTotal);
+    	else if (total > 21 && altTotal <= 21)
+    		return altTotal;
+    	else if (altTotal > 21 && total <= 21)
+    		return total;
+    	else
+    		return min(total, altTotal);
+    	
+    }
+    
+    private int max(int n, int m)
+    {
+    	if ( n > m)
+    		return n;
+    	else
+    		return m;
+    }
+    
+    private int min(int n, int m)
+    {
+    	if ( n < m)
+    		return n;
+    	else
+    		return m;
     }
     
     
@@ -189,6 +223,22 @@ public class Hand extends JPanel
 			c.unfold();
 		}
 		repaint();
+    }
+    
+    public boolean isBust()
+    {
+    	if (this.getValue() > 21)
+    		return true;
+    	else
+    		return false;
+    }
+    
+    public boolean isBlackJack()
+    {
+    	if(getValue() == 21 && cardsInHand() == 2)
+    		return true;
+    	else
+    		return false;
     }
     
     /**

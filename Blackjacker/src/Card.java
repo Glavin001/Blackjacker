@@ -97,6 +97,9 @@ public class Card extends JComponent
     			|| value == QUEEN 
     			|| value == KING)
     		return 10;
+    	if (value == ACE)
+    		return -1;
+    	
 
     	return value;
     }
