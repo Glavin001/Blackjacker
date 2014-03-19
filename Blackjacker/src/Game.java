@@ -71,7 +71,9 @@ public class Game extends Model
 		deck = new Deck();
 		player = new Player();
 		
+
 		dealer.setDeck(deck);
+
 		
 		// FIXME: Add players
 		players.add(dealer);
