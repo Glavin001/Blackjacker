@@ -32,7 +32,11 @@ public class Dealer extends Player
 	
 	public Dealer ()
 	{
-		
+	}
+	
+	public Deck getDeck()
+	{
+		return deck;
 	}
 	
 	/**
@@ -57,6 +61,7 @@ public class Dealer extends Player
 			card.unfold();
 		}
 		player.getHand().addCard(card);
+		notifyViews();
 	}
 	
 	/**
@@ -66,8 +71,8 @@ public class Dealer extends Player
 	public void setDeck(Deck newDeck)
 	{
 		deck = newDeck;
-		this.getHand().add(deck);
-		this.getHand().add(Box.createHorizontalStrut(10)); // Fixed width invisible separator.
+		notifyViews();
+	 
 	}
 	
 	/**

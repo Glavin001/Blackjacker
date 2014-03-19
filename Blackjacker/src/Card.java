@@ -14,7 +14,7 @@ import javax.swing.JComponent;
  * @author Glavin Wiechert & Faisal K Al Mazroa A.K.A ./~Saudi Coder
  *
  */
-public class Card extends JComponent
+public class Card extends Model
 {
 	/**
 	 * 
@@ -295,68 +295,4 @@ public class Card extends JComponent
     	}
     }
     
-    public void paintComponent(Graphics g) 
-    {
-        Graphics2D g2 = (Graphics2D) g;
-        super.paintComponent(g);  
-        //System.out.println("Displaying: "+this.toString());
-        //System.out.println(this.getBounds());
-        
-        if (this.isFolded())
-        {
-        	// Face down and hidden to players
-
-   /*         // Draw background
-            g2.setColor(Color.RED);
-            Rectangle r = new Rectangle(0, 0, this.getSize().width, this.getSize().height);
-            //System.out.println(r);
-            g2.fill(r);
-            
-        	// Face up to players
-            g2.setColor(Color.BLACK);
-            FontMetrics fm = g.getFontMetrics();
-            String str = "*Face Down*";
-            // Draw message
-            g2.drawString(str, this.getWidth()/2 - fm.stringWidth(str)/2, this.getHeight()/2);*/
-        	URL resource = getClass().getResource("rsrc/Images/back.png");
-        	BufferedImage bg;
-        	try
-        	{
-        		bg = ImageIO.read(resource);
-        	}
-        	catch (Exception e)
-        	{
-        		bg = null; 
-        	}
-        	
-            g2.drawImage(bg, 0, 0, this.getWidth(), this.getHeight(),
-            		0, 0, bg.getWidth(), bg.getHeight(),
-            		this);
-        }
-        else
-        {
-/*
-            // Draw background
-            g2.setColor(Color.WHITE);
-            Rectangle r = new Rectangle(0, 0, this.getSize().width, this.getSize().height);
-            //System.out.println(r);
-            g2.fill(r);
-            
-        	// Face up to players
-            g2.setColor(Color.BLACK);
-            FontMetrics fm = g.getFontMetrics();
-            String valStr = this.valueToString();
-            String suitStr = this.suitToString();
-            // Draw Value
-            g2.drawString(valStr, fm.getHeight(), fm.getHeight());
-            g2.drawString(valStr, this.getWidth() - fm.stringWidth(valStr) - fm.getHeight(), this.getHeight() - fm.getHeight());
-            // Draw Suit
-            g2.drawString(suitStr, this.getWidth()/2 - fm.stringWidth(suitStr)/2, this.getHeight()/2);*/
-            BufferedImage card = getImage();
-        	g2.drawImage(card, 0, 0, this.getWidth(), this.getHeight(),
-            		0, 0, card.getWidth(), card.getHeight(),
-            		this);
-        }        
-    }
-
 }

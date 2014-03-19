@@ -8,17 +8,14 @@ import javax.swing.*;
  * @author Glavin Wiechert
  *
  */
-public class Player 
+public class Player extends Model
 {
-
 	/**
 	 * 
 	 */
 	private Hand hand;
+	
 
-	/**
-	 * 
-	 */
 	public Player()
 	{
 		hand = new Hand();

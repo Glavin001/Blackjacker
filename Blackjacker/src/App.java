@@ -12,6 +12,10 @@ public class App
 	{
 		// 
 		Game game = new Game();
+		GameView view = new GameView(game);
+		game.notifyViews();
+		game.resetGame();
+		
 	}
 
 }

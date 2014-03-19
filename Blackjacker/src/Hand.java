@@ -9,7 +9,7 @@ import javax.swing.JPanel;
  * @author Glavin Wiechert and Faisal K Al Mazroa A.K.A ./~Saudi Coder 
  *
  */
-public class Hand extends JPanel
+public class Hand extends Model
 {
 	
 	/**
@@ -28,7 +28,7 @@ public class Hand extends JPanel
     public Hand()
     {
         cards = new ArrayList<Card>();
-		this.setLayout(new FlowLayout(FlowLayout.LEFT));
+
     }
     
     /**
@@ -37,8 +37,12 @@ public class Hand extends JPanel
     public void clearCards()
     {
         cards.clear();
-        this.removeAll();
-        repaint();
+        notifyViews();
+    }
+    
+    public ArrayList<Card> getCards()
+    {
+    	return cards;
     }
 
     /**
@@ -48,9 +52,7 @@ public class Hand extends JPanel
     public void removeCard(Card theCard)
     {
         cards.remove(theCard);
-        this.remove(theCard);
-        this.revalidate();
-        repaint();
+        notifyViews(); 
     }
 
     /**
@@ -61,9 +63,8 @@ public class Hand extends JPanel
         if (theCard != null)
         {
             cards.add(theCard);
-            this.add(theCard);
-            this.revalidate();
-            repaint();
+            System.out.println("Add Card");
+            notifyViews(); 
         }
     }
 
@@ -105,7 +106,7 @@ public class Hand extends JPanel
         cards = temp;
         
         // Display cards in new order
-        forceRefresh();
+        notifyViews();
     }
 
     /**
@@ -136,24 +137,13 @@ public class Hand extends JPanel
         cards = temp;
         
         // Display cards in new order
-        forceRefresh();
+        notifyViews();
     }
 
     /**
      * 
      */
-    public void forceRefresh()
-    {
-    	// Remove cards
-    	this.removeAll();
-    	// Re-add all cards
-    	for (Card card : cards)
-    	{
-    		this.add(card);
-    	}
-        this.revalidate();
-        repaint();
-    }
+
     
     /**
      * we do not need this because sorting both the values and suit will sort all the cards !!=
@@ -187,22 +177,6 @@ public class Hand extends JPanel
     	return total;
     }
     
-    private int max(int n, int m)
-    {
-    	if ( n > m)
-    		return n;
-    	else
-    		return m;
-    }
-    
-    private int min(int n, int m)
-    {
-    	if ( n < m)
-    		return n;
-    	else
-    		return m;
-    }
-    
     
     /**
      * 
@@ -214,7 +188,7 @@ public class Hand extends JPanel
 		{
 			c.unfold();
 		}
-		repaint();
+		notifyViews();
     }
     
     public boolean isBust()
@@ -236,26 +210,6 @@ public class Hand extends JPanel
     /**
      * 
      */
-    public void paint(Graphics g)
-    {
-    	System.out.println("Paint Hand");
-    	/*
-    	int maxWidth = this.getWidth() - 20;
-    	int cardWidth = (cards.size() == 0)? 0 : (maxWidth / cards.size());
-    	int cardHeight = this.getHeight();
-    	for (Card card : cards)
-    	{
-    		Dimension dMax = new Dimension(cardWidth, cardHeight);
-    		Dimension dMin = new Dimension(6, 8);
-    		Dimension dPref = new Dimension(cardWidth, cardHeight);
-    		card.setMaximumSize(dMax);
-    		card.setMinimumSize(dMin);
-    		card.setPreferredSize(dPref);
-    	}
-    	*/
-    	super.paint(g);
-    	super.paintComponents(g);
-    	//this.revalidate();
-    }
+
     
 }
