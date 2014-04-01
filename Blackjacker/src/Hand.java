@@ -140,18 +140,6 @@ public class Hand extends Model
         notifyViews();
     }
 
-    /**
-     * 
-     */
-
-    
-    /**
-     * we do not need this because sorting both the values and suit will sort all the cards !!=
-    public void sortCards()
-    {
-
-    }
-    */
 
     /**
      * 
@@ -206,10 +194,5 @@ public class Hand extends Model
     	else
     		return false;
     }
-    
-    /**
-     * 
-     */
-
     
 }

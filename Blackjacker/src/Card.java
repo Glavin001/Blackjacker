@@ -16,9 +16,9 @@ import javax.swing.JComponent;
  */
 public class Card extends Model
 {
-	/**
-	 * 
-	 */
+    /**
+     * 
+     */
     private int value;
     /**
      * 
@@ -38,17 +38,17 @@ public class Card extends Model
             JACK = 11,
             QUEEN = 12,
             KING = 13;
-    
+
     /**
      * 
      */
     private boolean folded;
-    
+
     /**
      * 
      */
     private Dimension preferredSize;
-    
+
     /**
      *
      * A constructor to create a Card object that will be either a "suit" or "value" card.
@@ -56,30 +56,30 @@ public class Card extends Model
     public Card(int initialValue, int initialSuit)
     {
         // 
-    	value = initialValue;
+        value = initialValue;
         suit = initialSuit;
-        
+
         //
         folded = true;
-        
+
         // UI
         // Size of playing cards: http://www.ask.com/question/what-are-the-dimensions-of-a-standard-playing-card 
         float sizeRatio = 2;
         preferredSize = new Dimension( (int) (63*sizeRatio), (int) (89*sizeRatio) ); // new Dimension(63, 89);
     }
-    
+
     public Dimension preferredSize()
     {
-    	
-		return preferredSize;
+
+        return preferredSize;
     }
-    
+
     public Dimension minimumSize()
     {
-    	
-		return preferredSize;
+
+        return preferredSize;
     }
-    
+
     /**
      * 
      * @return Suit of this card.
@@ -95,16 +95,16 @@ public class Card extends Model
      */
     public int getValue()
     {
-    	// See issue #8
-    	if (value == JACK 
-    			|| value == QUEEN 
-    			|| value == KING)
-    		return 10;
-    	if (value == ACE)
-    		return -1;
-    	
+        // See issue #8
+        if (value == JACK 
+                || value == QUEEN 
+                || value == KING)
+            return 10;
+        if (value == ACE)
+            return 1;
 
-    	return value;
+
+        return value;
     }
 
     /**
@@ -113,15 +113,15 @@ public class Card extends Model
      */
     public boolean isFolded()
     {
-    	return folded;
+        return folded;
     }
-    
+
     /**
      * 
      */
     public void fold()
     {
-    	folded = true;
+        folded = true;
     }
 
     /**
@@ -129,9 +129,9 @@ public class Card extends Model
      */
     public void unfold()
     {
-    	folded = false;
+        folded = false;
     }
-    
+
     /**
      *
      * @return the String value of each card depending on the code(number-value).
@@ -158,12 +158,12 @@ public class Card extends Model
         {
             return "Unknown Suit";
         } // for the else statement we have to wait until we test the final GUI to see what error checking we should do here ! S.C
-     }
+    }
 
-            /**
-             * 
-             * @return the String value of each card depending of the code (number-value).
-             */
+    /**
+     * 
+     * @return the String value of each card depending of the code (number-value).
+     */
     public String valueToString()
     {
 
@@ -233,66 +233,6 @@ public class Card extends Model
     {
         return valueToString() + " of " + suitToString();
     }
-    
-    /**
-     * 
-     */
-    private BufferedImage getImage()
-    {
-    	String path = "rsrc/Images/";
-    	switch (value)
-    	{
-    	case 2:
-    	case 3:
-    	case 4:
-    	case 5:
-    	case 6:
-    	case 7:
-    	case 8:
-    	case 9:
-    	case 10:
-    		path += value;
-    		break;
-    	case 11: 
-    		path += "J";
-    		break;
-    	case 12:
-    		path += "Q";
-    		break;
-    	case 13:
-    		path += "K";
-    		break;
-    	case 1:
-    		path += "A";
-    	}
-    	switch (suit)
-    	{
-    	case SPADES:
-    		path += "S";
-    		break;
-    	case HEARTS:
-    		path += "H";
-    		break;
-    	case DIAMONDS:
-    		path += "D";
-    		break;
-    	case CLUBS:
-    		path += "C";
-    		break;
-    	}
-    	path += ".png";
-    	
-    	URL resource = getClass().getResource(path);
-    	System.out.println(path);
-    	
-    	try
-    	{
-    		return ImageIO.read(resource);
-    	}
-    	catch (Exception e)
-    	{
-    		return null; 
-    	}
-    }
-    
+
+
 }

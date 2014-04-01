@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -34,6 +35,11 @@ public class HandView extends JPanel implements View
 	public void drawItUp() 
 	{
 		this.removeAll();
+		// Display Hand Value
+        JLabel handLabel = new JLabel("Hand: "+hand.getValue());
+        handLabel.setForeground(Color.WHITE);
+		this.add(handLabel);
+		// Display Cards
 		ArrayList<Card> cards = hand.getCards();
 		for (Card card : cards)
 		{
