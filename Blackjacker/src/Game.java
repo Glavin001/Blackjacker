@@ -24,6 +24,9 @@ public class Game extends Model
     JFrame frame;
     
     boolean reset = false; 
+    private int numDecks; 
+
+
 
     /**
      * 
@@ -55,8 +58,16 @@ public class Game extends Model
     public Game () 
     {
         // Initialize
+        this(1);
+
+    }
+    
+    public Game (int numDecks) 
+    {
+        // Initialize
         dealer = new Dealer(this);
-        deck = new Deck();
+        deck = new Deck(numDecks);
+        this.numDecks = numDecks;
 
         dealer.setDeck(deck);
 
@@ -67,19 +78,9 @@ public class Game extends Model
 
     }
     
-    public Game (int numDecks) 
+    public int getNumDecks()
     {
-        // Initialize
-        dealer = new Dealer(this);
-        deck = new Deck(numDecks);
-
-        dealer.setDeck(deck);
-
-        players.add(dealer);
-        //notifyViews();
-
-        resetGame(); // Starts the game for the first time.
-
+    	return numDecks;
     }
 
     public boolean isReset()

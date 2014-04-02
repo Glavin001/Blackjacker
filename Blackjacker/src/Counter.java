@@ -18,6 +18,7 @@ public class Counter extends Model implements View
 	private int counter;
 	private int trueCount;
 	private ArrayList<Card> counted = new ArrayList<Card>();
+	
 	/**
 	 * Constructor
 	 * @param game
@@ -32,12 +33,18 @@ public class Counter extends Model implements View
 		counter = 0;
 	}
 	
+	public void updateTrueCount()
+	{
+		int seen = counted.size()/52;
+		trueCount = counter/(game.getNumDecks() - seen);
+	}
 	public void count()
 	{
 		
 		if (game.isReset())
 		{
 			counter = 0;
+			trueCount = 0;
 			counted = new ArrayList<Card>();
 		}
 		
@@ -66,7 +73,6 @@ public class Counter extends Model implements View
 	
 		if (! seen)
 		{
-			counted.add(c);
 			switch(c.getValue())
 			{
 				case 10:
@@ -79,6 +85,8 @@ public class Counter extends Model implements View
 				case 6: counter++;
 					break;
 			}
+			counted.add(c);
+			updateTrueCount();
 		}
 	}
 
@@ -94,13 +102,14 @@ public class Counter extends Model implements View
 	/**
 	 * Return the string to display in the view
 	 */
-	public String getMessage() {
-		// TODO Auto-generated method stub
+	public String getMessage() 
+	{
 		String msg = "The count is "+ counter+"\n";
+		msg += "The true count is " + trueCount +"\n";
 		
-		if (3 < counter)
+		if (3 < trueCount)
 			msg += "Raise your bet.\n";
-		else if (0 > counter)
+		else if (0 > trueCount)
 			msg += "You're probably going to lose.";
 		else
 			msg += "Bet the minimum.";
