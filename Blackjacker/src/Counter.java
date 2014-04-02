@@ -106,7 +106,7 @@ public class Counter extends Model implements View
 			msg += "Bet the minimum.";
 	
 		
-		return "The count is "+ counter+"\n";
+		return msg;
 	}
 
 
