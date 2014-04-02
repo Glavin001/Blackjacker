@@ -114,7 +114,6 @@ public class Counter extends Model implements View
 		else
 			msg += "Bet the minimum.";
 	
-		
 		return msg;
 	}
 
