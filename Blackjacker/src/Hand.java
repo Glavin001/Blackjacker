@@ -63,7 +63,7 @@ public class Hand extends Model
         if (theCard != null)
         {
             cards.add(theCard);
-            System.out.println("Add Card");
+            ////System.out.println("Add Card");
             notifyViews(); 
         }
     }

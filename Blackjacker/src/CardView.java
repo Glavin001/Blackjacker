@@ -58,7 +58,7 @@ public class CardView extends JComponent implements View
 
     private BufferedImage getImage()
     {
-        //System.out.println(card.getValue()+" "+card.getSuit());
+        ////System.out.println(card.getValue()+" "+card.getSuit());
         String path = "rsrc/Images/";
         switch (card.getValue())
         {
@@ -103,7 +103,7 @@ public class CardView extends JComponent implements View
         path += ".png";
 
         URL resource = getClass().getResource(path);
-        //System.out.println(path);
+        ////System.out.println(path);
 
         try
         {
@@ -117,7 +117,7 @@ public class CardView extends JComponent implements View
 
     public void paintComponent(Graphics g) 
     {
-        System.out.println("Printing Card");
+        //System.out.println("Printing Card");
         Graphics2D g2 = (Graphics2D) g;
         super.paintComponent(g);  
 
@@ -140,7 +140,7 @@ public class CardView extends JComponent implements View
                 // Draw background
                 g2.setColor(Color.RED);
                 Rectangle r = new Rectangle(0, 0, this.getSize().width, this.getSize().height);
-                //System.out.println(r);
+                ////System.out.println(r);
                 g2.fill(r);
 
                 // Face up to players
@@ -167,7 +167,7 @@ public class CardView extends JComponent implements View
                 // Draw background
                 g2.setColor(Color.WHITE);
                 Rectangle r = new Rectangle(0, 0, this.getSize().width, this.getSize().height);
-                //System.out.println(r);
+                ////System.out.println(r);
                 g2.fill(r);
 
                 // Face up to players

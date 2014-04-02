@@ -65,7 +65,7 @@ public class DeckView extends JComponent implements View {
             // Draw background
             g2.setColor(Color.RED);
             Rectangle r = new Rectangle(0, 0, this.getSize().width, this.getSize().height);
-            //System.out.println(r);
+            ////System.out.println(r);
             g2.fill(r);
 
             // Face up to players

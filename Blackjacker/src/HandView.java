@@ -47,7 +47,7 @@ public class HandView extends JPanel implements View
 			this.add(temp);
 		}
 		
-		System.out.println("Cards " + hand.cardsInHand());
+		//System.out.println("Cards " + hand.cardsInHand());
 		revalidate();
 		repaint(); 
 		
@@ -55,7 +55,7 @@ public class HandView extends JPanel implements View
 	
     public void paint(Graphics g)
     {
-    	System.out.println("Paint Hand");
+    	//System.out.println("Paint Hand");
     	super.paint(g);
     	super.paintComponents(g);
 

@@ -92,18 +92,18 @@ public class Dealer extends Player
             // Check if Blackjack (21)
             if (hand.getValue() == 21)
             {
-                System.out.println("BLACKJACK! Dealer wins");
+                //System.out.println("BLACKJACK! Dealer wins");
                 return;
             }
             // Check if Bust
             else if (hand.getValue() > 21)
             {
-                System.out.println("Busted. Dealer loses.");
+                //System.out.println("Busted. Dealer loses.");
                 return;
             }
         }
         // Stand
-        System.out.println("Dealer stands.");
+        //System.out.println("Dealer stands.");
     }
     
     /**
@@ -123,18 +123,18 @@ public class Dealer extends Player
             // Check if Blackjack (21)
             if (hand.getValue() == 21)
             {
-                System.out.println("Dealer got 21!");
+                //System.out.println("Dealer got 21!");
                 return;
             }
             // Check if Bust
             else if (hand.getValue() > 21)
             {
-                System.out.println("Busted.");
+                //System.out.println("Busted.");
                 return;
             }
         }
         // Stand
-        System.out.println("Dealer stands.");
+        //System.out.println("Dealer stands.");
     }
 
     public void requestMove()

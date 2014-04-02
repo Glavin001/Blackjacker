@@ -39,9 +39,9 @@ public class Deck extends Model
         	// Ace = 1, 13 = King
             for(int theValue = 1; theValue <= 13; theValue++)
             {
-            	//System.out.println(howManyCards);
-            	//System.out.println(theSuit);
-            	//System.out.println(theValue);
+            	////System.out.println(howManyCards);
+            	////System.out.println(theSuit);
+            	////System.out.println(theValue);
                 cards[howManyCards] = new Card(theValue,theSuit);
                 ++howManyCards;
             }

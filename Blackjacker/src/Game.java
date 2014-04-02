@@ -22,6 +22,8 @@ public class Game extends Model
      * 
      */
     JFrame frame;
+    
+    boolean reset = false; 
 
     /**
      * 
@@ -65,7 +67,10 @@ public class Game extends Model
 
     }
 
-
+    public boolean isReset()
+    {
+    	return reset;
+    }
     public void hitPlayer(Player player)
     {
         // FIXME: Check if this is the current player
@@ -73,7 +78,11 @@ public class Game extends Model
 
             // Deal new card to player
             Card newCard = deck.dealCard();
+            
+ 
+            
             newCard.unfold();
+            
             Hand hand = player.getHand();
             hand.addCard(newCard);
 
@@ -95,7 +104,7 @@ public class Game extends Model
 
         }
         else {
-            System.out.println("Player, wait your turn!");
+            ////System.out.println("Player, wait your turn!");
         }
         notifyViews();
     }
@@ -127,7 +136,7 @@ public class Game extends Model
      */
     public void moveDealer()
     {
-        System.out.println("Dealer's move!");
+        ////System.out.println("Dealer's move!");
 
         // FIXME
         // Next player's turn
@@ -157,8 +166,10 @@ public class Game extends Model
 
     public void resetGame()
     {
+    	reset = true;
         deck.shuffle();
         playAgain();
+        reset = false;
     }
 
     /**
@@ -167,6 +178,10 @@ public class Game extends Model
     public void playAgain()
     {
 
+    	for (Card c : dealer.getHand().getCards())
+    		c.unfold();
+    	notifyViews();
+    	
         // Clear Hands
         for (Player p : players)
         {
@@ -215,8 +230,6 @@ public class Game extends Model
         moveToNextPlayer();
 
         notifyViews();
-
-
     }
 
     /**

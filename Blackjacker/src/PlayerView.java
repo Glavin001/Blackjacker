@@ -168,7 +168,7 @@ public class PlayerView extends JPanel implements View, ActionListener {
                 moveDealer();
             else
             {
-                System.out.println("Hit or Stand?");
+                //System.out.println("Hit or Stand?");
                 setPrompt("Player's Turn: Hit or Stand?");
             }
             */
@@ -196,7 +196,7 @@ public class PlayerView extends JPanel implements View, ActionListener {
         }
         else
         {
-            System.out.println("Unknown action: "+e.getActionCommand());
+            //System.out.println("Unknown action: "+e.getActionCommand());
         }
     }
 

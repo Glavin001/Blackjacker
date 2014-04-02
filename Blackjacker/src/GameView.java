@@ -52,7 +52,7 @@ public class GameView implements ActionListener, View
 	{
 		game = g;
 		game.registerView(this);
-		//System.out.println(game.numViews());
+		//////System.out.println(game.numViews());
 		
 		
 		// Setup
@@ -284,7 +284,7 @@ public class GameView implements ActionListener, View
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// 
-		System.out.println(e.getActionCommand());
+		////System.out.println(e.getActionCommand());
 		// 
 		/*
 		if ("hit".equals(e.getActionCommand()))
@@ -294,7 +294,7 @@ public class GameView implements ActionListener, View
 				moveDealer();
 			else
 			{
-				System.out.println("Hit or Stand?");
+				////System.out.println("Hit or Stand?");
 				setPrompt("Player's Turn: Hit or Stand?");
 			}
 		}
@@ -310,7 +310,7 @@ public class GameView implements ActionListener, View
 			player.getHand().sortBySuit();
 		else
 			*/
-			System.out.println("Unknown action: "+e.getActionCommand());
+			////System.out.println("Unknown action: "+e.getActionCommand());
 	
 	}
 	
