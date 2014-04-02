@@ -12,6 +12,7 @@ public class Deck extends Model
 	 * Keep track how many cards are being used.
 	 */
 	private int maxCards;
+	private int numDecks;
 	
 	/**
 	 * Array that holds the cards that represents the Deck.
@@ -23,16 +24,22 @@ public class Deck extends Model
 	 */
     public Deck()
     {
-    	reset();
+    	reset(1);
+    }
+    
+    public Deck(int n)
+    {
+    	reset(n);
+    	numDecks = n;
     }
     
 
     /**
      * 
      */
-    public void reset()
+    public void reset(int n)
     {
-        cards = new Card[52]; // create an unshuffled cards.
+        cards = new Card[n*52]; // create an unshuffled cards.
         int howManyCards = 0; // howMany cards have been created.
         for(int theSuit = 0; theSuit <= 3; theSuit++)
         {
@@ -42,12 +49,17 @@ public class Deck extends Model
             	////System.out.println(howManyCards);
             	////System.out.println(theSuit);
             	////System.out.println(theValue);
-                cards[howManyCards] = new Card(theValue,theSuit);
-                ++howManyCards;
+            	for (int i = 0; i < n; i++)
+            	{
+            		cards[howManyCards] = new Card(theValue,theSuit);
+            		++howManyCards;
+            	}
+                
             }
         }
        maxCards = 0;
     }
+    
 
 	/**
 	 * 
@@ -71,7 +83,7 @@ public class Deck extends Model
 	 */
 	public int cardsRemaining()
 	{
-		return 52 - maxCards;
+		return 52*numDecks - maxCards;
 	}
 
 	/**
@@ -89,7 +101,7 @@ public class Deck extends Model
 	 */
 	public Card dealCard()
 	{
-		if(maxCards == 52) // if we used all cards deck is over , shuffle !
+		if(maxCards == numDecks*52) // if we used all cards deck is over , shuffle !
         {
             shuffle();
         }
@@ -98,13 +110,7 @@ public class Deck extends Model
         return cards[maxCards - 1];
 	}
 
-	/**
-	 *  We don't need this function ! S.C
-	 */
-	public void addDeck()
-	{
-		// TODO
-	}
+
 	
 
 

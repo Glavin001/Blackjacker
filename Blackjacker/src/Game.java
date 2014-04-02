@@ -66,6 +66,21 @@ public class Game extends Model
         resetGame(); // Starts the game for the first time.
 
     }
+    
+    public Game (int numDecks) 
+    {
+        // Initialize
+        dealer = new Dealer(this);
+        deck = new Deck(numDecks);
+
+        dealer.setDeck(deck);
+
+        players.add(dealer);
+        //notifyViews();
+
+        resetGame(); // Starts the game for the first time.
+
+    }
 
     public boolean isReset()
     {

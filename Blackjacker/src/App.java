@@ -11,7 +11,7 @@ public class App
     public static void main(String[] args) 
     {
         // Init Game
-        Game game = new Game();
+        Game game = new Game(4);
         // Add Players
         game.addPlayer(new Player(game));
         game.addPlayer(new Player(game));
