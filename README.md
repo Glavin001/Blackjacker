@@ -3,7 +3,7 @@ Blackjacker
 
 > Hack the game of Blackjack!
 
-![blackjack game](Screenshots/multiplayer_v1.png)
+![Blackjack game screenshot](Screenshots/multiplayer_v1.png)
 
 -----
 
@@ -16,14 +16,9 @@ Use [Eclipse](https://www.eclipse.org/) to open/[switch to this Workspace](http:
 
 See [Documentation/ directory](Documentation/).
 
-## Contributing
+## Design
 
-To develop this application.
-
-### UML Diagram
-
-We use [UMLLet](http://www.umlet.com/) for creating [UML diagrams](http://en.wikipedia.org/wiki/Unified_Modeling_Language).
-Load the UML files in [Design](./Design) directory.
+See [Design/ directory](Design/).
 
 ## Authors
 
