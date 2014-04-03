@@ -89,57 +89,45 @@ public class Dealer extends Player
         {
             // Hit
             dealCardToPlayer(this, true);
-            // Check if Blackjack (21)
+            // Check if (21)
             if (hand.getValue() == 21)
             {
-                //System.out.println("BLACKJACK! Dealer wins");
+                setLabels("Dealer has 21!");
                 return;
             }
             // Check if Bust
             else if (hand.getValue() > 21)
             {
-                //System.out.println("Busted. Dealer loses.");
+                setLabels("Dealer Busted!");
                 return;
             }
         }
-        // Stand
-        //System.out.println("Dealer stands.");
+        boolean hitAgain = true;
+        for (Player p : game.getPlayers())
+        {
+        	if (p != this)
+        		if (p.getHand().getValue()
+        				<= hand.getValue() )
+                    hitAgain = false;
+        }
+        if (hitAgain) dealCardToPlayer(this, true);
     }
     
-    /**
-     * DEaler makes it's moves.
-     * @param value Player's value
-     */
-    public void makeMoves(int value)
-    {
-        Hand hand = this.getHand();
-        hand.showAllCards();
-
-        int minVal = 17;
-        while (hand.getValue() < 17 || (hand.getValue() < value) )
-        {
-            // Hit
-            dealCardToPlayer(this, true);
-            // Check if Blackjack (21)
-            if (hand.getValue() == 21)
-            {
-                //System.out.println("Dealer got 21!");
-                return;
-            }
-            // Check if Bust
-            else if (hand.getValue() > 21)
-            {
-                //System.out.println("Busted.");
-                return;
-            }
-        }
-        // Stand
-        //System.out.println("Dealer stands.");
-    }
+ 
 
     public void requestMove()
     {
         makeMoves();
+        game.resolveGame();
     }
+    
+	public void setLabels(String msg) 
+	{
+		for (View view: getViews())
+		{
+			if (view.getClass() == DealerView.class) 
+				((DealerView) view).getLabel().setText(msg);
+		}	
+	}
 
 }

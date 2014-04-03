@@ -9,12 +9,13 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 /**
  * @author Glavin Wiechert && Faisal K Al Mazroa A.K.A ./~Saudi Coder
  * 
  */
-public class DeckView extends JComponent implements View {
+public class DeckView extends JPanel implements View {
 
     private Dimension preferredSize;
     private Deck deck;
@@ -24,7 +25,7 @@ public class DeckView extends JComponent implements View {
         deck = d;
         d.registerView(this);
         float sizeRatio = 2;
-        preferredSize = new Dimension( (int) (63*sizeRatio), (int) (89*sizeRatio) ); // new Dimension(63, 89);
+        preferredSize = new Dimension( (int) (63*sizeRatio), (int) (89*sizeRatio) ); 
     }
 
     public Dimension preferredSize()

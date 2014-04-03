@@ -13,7 +13,7 @@ public class Player extends Model
     /**
      * 
      */
-    private Game game;
+    protected Game game;
     
     /**
      * 
@@ -120,5 +120,14 @@ public class Player extends Model
         waitingForMove = false;
         notifyViews();
     }
+
+	public void setLabels(String msg) 
+	{
+		for (View view: getViews())
+		{
+			if (view.getClass() == PlayerView.class) 
+				((PlayerView) view).getLabel().setText(msg);
+		}	
+	}
 
 }

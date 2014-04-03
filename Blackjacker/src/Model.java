@@ -22,7 +22,6 @@ public abstract class Model {
 	 */
 	public void notifyViews()
 	{
-		System.out.println(this.getClass().getName() + ": " +  views.size());
 		for (View v : views)
 		{
 			v.drawItUp();
@@ -32,6 +31,14 @@ public abstract class Model {
 	public int numViews()
 	{
 		return views.size();
+	}
+	
+	/**
+	 * 
+	 */
+	public  ArrayList<View> getViews()
+	{
+		return views;
 	}
 	
 }

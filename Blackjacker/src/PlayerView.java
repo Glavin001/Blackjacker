@@ -121,7 +121,8 @@ public class PlayerView extends JPanel implements View, ActionListener {
         standButton.setEnabled(isTurn);
 
         //
-        playerLabel.setText(isTurn?"Your turn!":"Wait your turn.");
+        playerLabel.setText(isTurn?
+        		"Your turn!": playerLabel.getText());
         //
         repaint();
     }
@@ -143,6 +144,11 @@ public class PlayerView extends JPanel implements View, ActionListener {
             System.out.println("Unknown action: "+e.getActionCommand());
         }
     }
+
+	public JLabel getLabel() 
+	{
+		return playerLabel;
+	}
 
 
 

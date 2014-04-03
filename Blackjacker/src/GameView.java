@@ -61,7 +61,11 @@ public class GameView implements View
 		}
 		
 		// Display the window.
-		frame.setSize(1000, 700);
+		if (game.getPlayers().size() > 2)
+			frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		else
+			frame.setSize(1000, 600);
+		
 		frame.setResizable(true);
 		//frame.pack();
 		frame.setVisible(true);

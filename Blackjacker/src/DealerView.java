@@ -88,9 +88,7 @@ public class DealerView extends JPanel implements ActionListener, View{
 	    c.weightx = 0.5;
 	    c.gridx = 2;
 	    c.gridy = row;
-	    this.add(countButton, c);
-	    
-		
+	    this.add(countButton, c);	
 		
 		
 		row ++;
@@ -151,6 +149,12 @@ public class DealerView extends JPanel implements ActionListener, View{
 		else
 			System.out.println("Unknown action: "+ e.getActionCommand());	
 	}
+	
+	public JLabel getLabel() 
+	{
+		return dealerLabel;
+	}
+	
 	
 
 }

@@ -49,10 +49,6 @@ public class Game extends Model
      */
     private Player currentPlayer;
 
-    /**
-     * Displays a message about this game.
-     */
-    private String prompt;
 
 
     /**
@@ -103,7 +99,8 @@ public class Game extends Model
     public void hitPlayer(Player player)
     {
         // FIXME: Check if this is the current player
-        if (player.equals(this.currentPlayer)) {
+        if (player.equals(this.currentPlayer)) 
+        {
 
             // Deal new card to player
             Card newCard = deck.dealCard();
@@ -115,31 +112,25 @@ public class Game extends Model
             Hand hand = player.getHand();
             hand.addCard(newCard);
 
-            if (hand.isBlackJack())
+            if (hand.getValue() == 21)
             {
-                //setPlayerMessage("Blackjack!");
+                player.setLabels("Player has 21!");
                 moveToNextPlayer();
             }
             else if (hand.isBust())
             {
-                //setPlayerMessage("Player busted! Player's Hand:  "+ hand.getValue());
+                player.setLabels("Player busted!");
                 moveToNextPlayer();
             }
-            else 
-            {
-                //setPlayerMessage("Player's Hand:  "+ hand.getValue());
-
-            }
-
         }
-        else {
-            ////System.out.println("Player, wait your turn!");
-        }
+
         notifyViews();
     }
 
     public void standPlayer(Player player)
     {
+        player.setLabels("Player has " 
+        		+ player.getHand().getValue());
         moveToNextPlayer();
     }
 
@@ -149,6 +140,11 @@ public class Game extends Model
     private void moveToNextPlayer()
     {
         currentPlayer = getNextPlayer(currentPlayer);
+        if (currentPlayer.getHand().isBlackJack())
+        {
+        	moveToNextPlayer();
+        	return;
+        }
         for (Player p : players)
         {
             if (!p.equals(currentPlayer))
@@ -160,38 +156,6 @@ public class Game extends Model
         currentPlayer.requestMove();
     }
 
-    /**
-     * 
-     */
-    public void moveDealer()
-    {
-        ////System.out.println("Dealer's move!");
-
-        // FIXME
-        // Next player's turn
-        // The Dealer's turn
-        setPrompt("Dealer's turn.");
-        /*
-        if (player.getHand().isBust())
-            dealer.makeMoves();
-        else
-            dealer.makeMoves(player.getHand().getValue());
-        Hand hand = dealer.getHand();
-         */
-
-        /*
-		// Set Dealer Message
-		if (hand.isBlackJack())
-			setDealerMessage("Blackjack!");
-		else if (hand.isBust())
-			setDealerMessage( "Dealer busted! Dealer's Hand: " + hand.getValue() );
-		else 
-			setDealerMessage( "Dealer's Hand: " + hand.getValue());
-         */
-        notifyViews();
-
-        resolveGame();
-    }
 
     public void resetGame()
     {
@@ -221,7 +185,7 @@ public class Game extends Model
         dealer.setDeck(deck);
 
         // Temporary fix for shuffling active cards
-        if (deck.cardsRemaining() < 20)
+        if (deck.cardsRemaining() < 10*players.size())
             deck.shuffle();
 
         for (Player p : players)
@@ -235,24 +199,14 @@ public class Game extends Model
             }
             else
             {
+            	p.setLabels("Wait your turn.");
                 dealer.dealCardToPlayer(p,	true);
                 dealer.dealCardToPlayer(p,	true);
             }
+            
+            if (p.getHand().isBlackJack()) 
+                p.setLabels("BlackJack!");
         }
-
-        /*
-        if (player.getHand().isBlackJack()) 
-        {
-            //setPlayerMessage("Player's Hand: BlackJack!");
-            moveDealer();
-        }
-        else
-        {
-            setPrompt("Player's turn.");
-            //setPlayerMessage("Player's Hand: " + player.getHand().getValue());
-        }
-         */
-        //
 
         // Ask first player for move
         currentPlayer = dealer;
@@ -261,23 +215,7 @@ public class Game extends Model
         notifyViews();
     }
 
-    /**
-     * 
-     * @param msg
-     */
-    public void setPrompt(String msg)
-    {
-        prompt = msg;
-        notifyViews();
-    }
 
-    /**
-     * 
-     */
-    public String getPrompt()
-    {
-        return prompt;
-    }
 
     /**
      * 
@@ -287,6 +225,8 @@ public class Game extends Model
 
         // Get the hands to compare
         Hand dHand = dealer.getHand();
+        int dealerWins = 0;
+        int dealerDraws = 0;
 
         for (Player player : players)
         {
@@ -303,13 +243,32 @@ public class Game extends Model
             boolean isWin = !pHand.isBust() && (pHand.getValue() > dHand.getValue()
                     || ( pHand.isBlackJack() && !dHand.isBlackJack() ) || dHand.isBust() );
 
+            if (player.getClass() == Player.class)
+            {
             // Display the appropriate message
-            if (isPush)
-                setPrompt("Push! Draw Game");
-            else if (isWin)
-                setPrompt("Player Wins!");
-            else
-                setPrompt("Dealer Wins!");
+	            if (isPush)
+	            {
+	                player.setLabels("Push! Draw Game");
+	                dealerDraws++;	
+	            }
+	            else if (isWin)
+	                player.setLabels("Player Wins!");
+	            else
+	            {
+	                player.setLabels("Dealer Wins!");
+	                dealerWins++;
+	            }
+            }
+           
+            String msg = (dealerWins == 0
+            		&& dealerDraws == 0 ?
+            				"Dealer Loses!"
+            				: (dealerWins != 0
+            				? "Dealer Wins " + dealerWins
+            				: "Dealer Draws" + dealerDraws));
+        	if (dealerWins != 0 && dealerDraws != 0)
+        		msg += " & Draws " + dealerDraws;
+            dealer.setLabels(msg);
         }
 
     }
