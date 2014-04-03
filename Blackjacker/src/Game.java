@@ -18,15 +18,18 @@ import javax.swing.SwingConstants;
 public class Game extends Model
 {
 
-    /**
-     * 
-     */
-    JFrame frame;
+
+	private GameView view;
     
-    boolean reset = false; 
+    /**
+     * Is the deck being reshuffled?
+     */
+    private boolean reset = false;
+    
+    /**
+     * The number of decks in the shoe
+     */
     private int numDecks; 
-
-
 
     /**
      * 
@@ -76,6 +79,16 @@ public class Game extends Model
 
         resetGame(); // Starts the game for the first time.
 
+    }
+    
+    public void setGameView(GameView v)
+    {
+    	view = v;
+    }
+    
+    public GameView getGameView()
+    {
+    	return view;
     }
     
     public int getNumDecks()

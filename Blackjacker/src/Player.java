@@ -23,7 +23,12 @@ public class Player extends Model
      * 
      */
     private boolean waitingForMove = false;
-
+    
+    /**
+     * 
+     */
+    private Counter count = null;
+    
     /**
      * 
      */
@@ -40,6 +45,24 @@ public class Player extends Model
     public Hand getHand()
     {
         return hand;
+    }
+    
+    /**
+     * 
+     * 
+     */
+	public Counter getCounter() 
+	{
+		return count;
+	}
+    
+    /**
+     * 
+     * @return	This player's hand.
+     */
+    public void registerCounter(Counter c)
+    {
+    	count = c;
     }
 
     /**

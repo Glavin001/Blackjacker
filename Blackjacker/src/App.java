@@ -23,7 +23,7 @@ public class App
         CounterView cView = new CounterView(new Counter(game));
         
         game.resetGame();
-        game.notifyViews();
+        //game.notifyViews();
         
 
     }

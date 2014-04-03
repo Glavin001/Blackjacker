@@ -33,15 +33,7 @@ public class PlayerView extends JPanel implements View, ActionListener {
      */
     private JButton standButton;
 
-    /**
-     * 
-     */
-    private JButton restartButton;
 
-    /**
-     * 
-     */	
-    private JButton reshuffleButton;
 
 
     /**
@@ -85,7 +77,7 @@ public class PlayerView extends JPanel implements View, ActionListener {
         hand.setBackground( new Color(10,60,70) );
         GridBagConstraints cHand = new GridBagConstraints();
         cHand.fill = GridBagConstraints.HORIZONTAL;
-        cHand.ipady = 60;      //make this component tall
+        cHand.ipady = 5;   // padding between buttons and cards
         cHand.weightx = 0.0;
         cHand.gridwidth = 5;
         cHand.gridx = 0;
@@ -115,28 +107,6 @@ public class PlayerView extends JPanel implements View, ActionListener {
         c.gridx = 1;
         c.gridy = row;
         this.add(standButton, c);
-
-
-        // 
-        restartButton = new JButton("Play Again");
-        restartButton.setActionCommand("restart");
-        restartButton.addActionListener(this);
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridwidth = 1;
-        c.weightx = 0.5;
-        c.gridx = 2;
-        c.gridy = row;
-        this.add(restartButton, c);
-
-        reshuffleButton = new JButton("ReShuffle");
-        reshuffleButton.setActionCommand("reshuffle");
-        reshuffleButton.addActionListener(this);
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridwidth = 1;
-        c.weightx = 0.5;
-        c.gridx = 3;
-        c.gridy = row;
-        this.add(reshuffleButton, c);
         
     }
 
@@ -163,40 +133,14 @@ public class PlayerView extends JPanel implements View, ActionListener {
         if ("hit".equals(e.getActionCommand()))
         {
             player.hit();
-            /*
-            if (player.getHand().getValue() >= 21)
-                moveDealer();
-            else
-            {
-                //System.out.println("Hit or Stand?");
-                setPrompt("Player's Turn: Hit or Stand?");
-            }
-            */
         }
         else if ("stand".equals(e.getActionCommand()))
         {
            player.stand();
-            //moveDealer();
-        }
-        else if ("restart".equals(e.getActionCommand()))
-        {
-            player.playAgain();
-        }
-        else if ("reshuffle".equals(e.getActionCommand()))
-        {
-            player.resetGame();
-        }
-        else if ("sortByValue".equals(e.getActionCommand()))
-        {
-            player.getHand().sortByValue();
-        }
-        else if ("sortBySuit".equals(e.getActionCommand()))
-        {
-            player.getHand().sortBySuit();
         }
         else
         {
-            //System.out.println("Unknown action: "+e.getActionCommand());
+            System.out.println("Unknown action: "+e.getActionCommand());
         }
     }
 

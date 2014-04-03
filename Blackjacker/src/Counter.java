@@ -27,9 +27,7 @@ public class Counter extends Model implements View
 	{
 		this.game = game;
 		this.game.registerView(this); // Watch for changes in game.
-		counter = 0;
-		
-		game.getDealer().getHand();
+		this.game.getDealer().registerCounter(this);
 		counter = 0;
 	}
 	
@@ -57,7 +55,11 @@ public class Counter extends Model implements View
 	
 			}
 		}
-		//notifyViews();
+	}
+	
+	public Game getGame()
+	{
+		return game;
 	}
 	
 	public void countCard(Card c)
@@ -89,6 +91,11 @@ public class Counter extends Model implements View
 			updateTrueCount();
 		}
 	}
+	
+	public void display()
+	{
+		notifyViews();
+	}
 
 	/**
 	 * 
@@ -97,7 +104,6 @@ public class Counter extends Model implements View
 	public void drawItUp() 
 	{
 		count();
-		notifyViews();
 	}
 	/**
 	 * Return the string to display in the view
