@@ -151,7 +151,7 @@ public class Hand extends Model
     	for (Card c : cards)
     	{
     		if (! c.isFolded() )
-    			if (c.getValue() == -1)
+    			if (c.getValue() == 1)
     			{
     				total += 1;
     				aceCount ++;
