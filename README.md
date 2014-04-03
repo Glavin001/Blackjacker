@@ -3,6 +3,9 @@ Blackjacker
 
 > Hack the game of Blackjack!
 
+## Presentation
+See https://docs.google.com/presentation/d/1ri4L3ublScE9f7l4AuuQ8kLmGDaOgCts3ntlryyuew8/edit?usp=sharing 
+
 ![Blackjack game screenshot](Screenshots/multiplayer_v1.png)
 
 -----
