@@ -7,7 +7,11 @@ Blackjacker
 
 -----
 
-## Installation
+## Download
+
+See [Releases](https://github.com/Glavin001/Blackjacker/releases) for prebuilt exectuable Jars.
+
+## Installation from Source Code
 
 Clone this repository.
 Use [Eclipse](https://www.eclipse.org/) to open/[switch to this Workspace](http://help.eclipse.org/juno/index.jsp?topic=%2Forg.eclipse.platform.doc.user%2Freference%2Fref-workspaceswitch.htm), the root repository directory.
