@@ -3,7 +3,7 @@ Blackjacker
 
 > Hack the game of Blackjack!
 
-![blackjack game](Screenshots/basic_v1.png)
+![blackjack game](Screenshots/multiplayer_v1.png)
 
 -----
 
