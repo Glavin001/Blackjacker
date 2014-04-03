@@ -11,19 +11,21 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
 /**
- * @author Glavin Wiechert & Faisal K Al Mazroa A.K.A ./~Saudi Coder
+ * The Card model.
+ * @author Glavin Wiechert & Dylan Meijer & Faisal K. AlMazroa
  *
  */
 public class Card extends Model
 {
     /**
-     * 
+     * The value
      */
     private int value;
     /**
-     * 
+     * The suit.
      */
     private int suit;
+    
     /**
      *  The code value for the suits
      */
@@ -40,14 +42,9 @@ public class Card extends Model
             KING = 13;
 
     /**
-     * 
+     * If folded.
      */
     private boolean folded;
-
-    /**
-     * 
-     */
-    private Dimension preferredSize;
 
     /**
      *
@@ -62,22 +59,6 @@ public class Card extends Model
         //
         folded = true;
 
-        // UI
-        // Size of playing cards: http://www.ask.com/question/what-are-the-dimensions-of-a-standard-playing-card 
-        float sizeRatio = 2;
-        preferredSize = new Dimension( (int) (63*sizeRatio), (int) (89*sizeRatio) ); // new Dimension(63, 89);
-    }
-
-    public Dimension preferredSize()
-    {
-
-        return preferredSize;
-    }
-
-    public Dimension minimumSize()
-    {
-
-        return preferredSize;
     }
 
     /**

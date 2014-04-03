@@ -12,20 +12,22 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 /**
- * @author Glavin Wiechert & Dylan
- *
+ * The Game class.
+ * @author Glavin Wiechert & Dylan Meijer & Faisal & Faisal K. AlMazroa
  */
 public class Game extends Model
 {
 
+    /**
+     * The game model's view.
+     */
+    private GameView view;
 
-	private GameView view;
-    
     /**
      * Is the deck being reshuffled?
      */
     private boolean reset = false;
-    
+
     /**
      * The number of decks in the shoe
      */
@@ -60,7 +62,7 @@ public class Game extends Model
         this(1);
 
     }
-    
+
     public Game (int numDecks) 
     {
         // Initialize
@@ -76,25 +78,25 @@ public class Game extends Model
         resetGame(); // Starts the game for the first time.
 
     }
-    
+
     public void setGameView(GameView v)
     {
-    	view = v;
+        view = v;
     }
-    
+
     public GameView getGameView()
     {
-    	return view;
+        return view;
     }
-    
+
     public int getNumDecks()
     {
-    	return numDecks;
+        return numDecks;
     }
 
     public boolean isReset()
     {
-    	return reset;
+        return reset;
     }
     public void hitPlayer(Player player)
     {
@@ -104,11 +106,11 @@ public class Game extends Model
 
             // Deal new card to player
             Card newCard = deck.dealCard();
-            
- 
-            
+
+
+
             newCard.unfold();
-            
+
             Hand hand = player.getHand();
             hand.addCard(newCard);
 
@@ -130,7 +132,7 @@ public class Game extends Model
     public void standPlayer(Player player)
     {
         player.setLabels("Player has " 
-        		+ player.getHand().getValue());
+                + player.getHand().getValue());
         moveToNextPlayer();
     }
 
@@ -142,8 +144,8 @@ public class Game extends Model
         currentPlayer = getNextPlayer(currentPlayer);
         if (currentPlayer.getHand().isBlackJack())
         {
-        	moveToNextPlayer();
-        	return;
+            moveToNextPlayer();
+            return;
         }
         for (Player p : players)
         {
@@ -159,7 +161,7 @@ public class Game extends Model
 
     public void resetGame()
     {
-    	reset = true;
+        reset = true;
         deck.shuffle();
         playAgain();
         reset = false;
@@ -171,10 +173,10 @@ public class Game extends Model
     public void playAgain()
     {
 
-    	for (Card c : dealer.getHand().getCards())
-    		c.unfold();
-    	notifyViews();
-    	
+        for (Card c : dealer.getHand().getCards())
+            c.unfold();
+        notifyViews();
+
         // Clear Hands
         for (Player p : players)
         {
@@ -199,11 +201,11 @@ public class Game extends Model
             }
             else
             {
-            	p.setLabels("Wait your turn.");
+                p.setLabels("Wait your turn.");
                 dealer.dealCardToPlayer(p,	true);
                 dealer.dealCardToPlayer(p,	true);
             }
-            
+
             if (p.getHand().isBlackJack()) 
                 p.setLabels("BlackJack!");
         }
@@ -245,37 +247,37 @@ public class Game extends Model
 
             if (player.getClass() == Player.class)
             {
-            // Display the appropriate message
-	            if (isPush)
-	            {
-	                player.setLabels("Push! Draw Game");
-	                dealerDraws++;	
-	            }
-	            else if (isWin)
-	                player.setLabels("Player Wins!");
-	            else
-	            {
-	                player.setLabels("Dealer Wins!");
-	                dealerWins++;
-	            }
+                // Display the appropriate message
+                if (isPush)
+                {
+                    player.setLabels("Push! Draw Game");
+                    dealerDraws++;	
+                }
+                else if (isWin)
+                    player.setLabels("Player Wins!");
+                else
+                {
+                    player.setLabels("Dealer Wins!");
+                    dealerWins++;
+                }
             }
-           
+
             String msg = (dealerWins == 0
-            		&& dealerDraws == 0 ?
-            				"Dealer Loses!"
-            				: (dealerWins != 0
-            				? "Dealer Wins " + dealerWins
-            				: "Dealer Draws" + dealerDraws));
-        	if (dealerWins != 0 && dealerDraws != 0)
-        		msg += " & Draws " + dealerDraws;
+                    && dealerDraws == 0 ?
+                            "Dealer Loses!"
+                            : (dealerWins != 0
+                            ? "Dealer Wins " + dealerWins
+                                    : "Dealer Draws" + dealerDraws));
+            if (dealerWins != 0 && dealerDraws != 0)
+                msg += " & Draws " + dealerDraws;
             dealer.setLabels(msg);
         }
 
     }
 
     /**
-     * 
-     * @return
+     * Get all players.
+     * @return  All players.
      */
     public ArrayList<Player> getPlayers()
     {
@@ -299,7 +301,7 @@ public class Game extends Model
             return false;
         }
     }
-    
+
     /**
      * Remove player from game. Will start a new round if successful.
      * @param oldPlayer Player to be removed.
@@ -318,10 +320,10 @@ public class Game extends Model
             return false;
         }
     }
-    
+
     /**
-     * 
-     * @return
+     * Get the dealer.
+     * @return The Dealer.
      */
     public Dealer getDealer()
     {
@@ -329,9 +331,9 @@ public class Game extends Model
     }
 
     /**
-     * 
+     * Get the player's index.
      * @param player
-     * @return
+     * @return The player's index.
      */
     private int getIndexOfPlayer(Player player) 
     {
@@ -340,9 +342,9 @@ public class Game extends Model
     }
 
     /**
-     * 
+     * Get the next player's index.
      * @param player
-     * @return
+     * @return  The next player's index.
      */
     private int getNextPlayerIndex(Player player) 
     {
@@ -356,9 +358,9 @@ public class Game extends Model
     }
 
     /**
-     * 
+     * Get the next player.
      * @param player
-     * @return
+     * @return The player.
      */
     private Player getNextPlayer(Player player) 
     {

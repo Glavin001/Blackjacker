@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
- * @author Glavin Wiechert and Faisal K Al Mazroa A.K.A ./~Saudi Coder 
+ * The Hand model.
+ * @author Glavin Wiechert & Dylan Meijer & Faisal K. AlMazroa
  *
  */
 public class Hand extends Model
@@ -23,7 +24,7 @@ public class Hand extends Model
     private ArrayList<Card> cards;
 
     /**
-     * 
+     * Constructor
      */
     public Hand()
     {

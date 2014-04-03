@@ -12,7 +12,8 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 /**
- * @author Glavin Wiechert && Faisal K Al Mazroa A.K.A ./~Saudi Coder
+ * The Deck model's view.
+ * @author Glavin Wiechert & Dylan Meijer & Faisal K. AlMazroa
  * 
  */
 public class DeckView extends JPanel implements View {
@@ -20,6 +21,10 @@ public class DeckView extends JPanel implements View {
     private Dimension preferredSize;
     private Deck deck;
 
+    /**
+     * Constructor
+     * @param d The deck model.
+     */
     public DeckView(Deck d)
     {
         deck = d;

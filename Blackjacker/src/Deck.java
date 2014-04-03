@@ -2,8 +2,8 @@ import java.util.*;
 
 
 /**
- * @author Glavin Wiechert && Faisal K Al Mazroa A.K.A ./~Saudi Coder
- * 
+ * The Deck model.
+ * @author Glavin Wiechert & Dylan Meijer & Faisal K. AlMazroa
  */
 public class Deck extends Model
 {
@@ -12,6 +12,9 @@ public class Deck extends Model
 	 * Keep track how many cards are being used.
 	 */
 	private int maxCards;
+	/**
+	 * Number of cards in this deck.
+	 */
 	private int numDecks;
 	
 	/**
@@ -20,13 +23,17 @@ public class Deck extends Model
 	private Card[] cards;
 
 	/**
-	 * 
+	 * Constructor
 	 */
     public Deck()
     {
     	reset(1);
     }
     
+    /**
+     * Constructor
+     * @param n Number of cards.
+     */
     public Deck(int n)
     {
     	reset(n);
@@ -35,7 +42,8 @@ public class Deck extends Model
     
 
     /**
-     * 
+     * Reset the deck
+     * @param n Number of cards.
      */
     public void reset(int n)
     {

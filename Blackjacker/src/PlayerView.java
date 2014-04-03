@@ -13,28 +13,25 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 /**
- * @author Dylan & Glavin
- *
+ * The Player model's View
+ * @author Glavin Wiechert & Dylan Meijer & Faisal K. AlMazroa
  */
 public class PlayerView extends JPanel implements View, ActionListener {
 
     /**
-     * 
+     * The player model.
      */
     private Player player;
 
     /**
-     * 
+     * The hit button
      */
     private JButton hitButton;
 
     /**
-     * 
+     * The stand button
      */
     private JButton standButton;
-
-
-
 
     /**
      * Displays player hand value
@@ -42,7 +39,8 @@ public class PlayerView extends JPanel implements View, ActionListener {
     private JLabel playerLabel;
 
     /**
-     * 
+     * The constructor
+     * @param p
      */
     public PlayerView(Player p)
     {
@@ -107,11 +105,11 @@ public class PlayerView extends JPanel implements View, ActionListener {
         c.gridx = 1;
         c.gridy = row;
         this.add(standButton, c);
-        
+
     }
 
     /**
-     * 
+     * Handle model changes.
      */
     public void drawItUp() 
     {
@@ -122,7 +120,7 @@ public class PlayerView extends JPanel implements View, ActionListener {
 
         //
         playerLabel.setText(isTurn?
-        		"Your turn!": playerLabel.getText());
+                "Your turn!": playerLabel.getText());
         //
         repaint();
     }
@@ -137,7 +135,7 @@ public class PlayerView extends JPanel implements View, ActionListener {
         }
         else if ("stand".equals(e.getActionCommand()))
         {
-           player.stand();
+            player.stand();
         }
         else
         {
@@ -145,10 +143,14 @@ public class PlayerView extends JPanel implements View, ActionListener {
         }
     }
 
-	public JLabel getLabel() 
-	{
-		return playerLabel;
-	}
+    /**
+     * Get label
+     * @return the label.
+     */
+    public JLabel getLabel() 
+    {
+        return playerLabel;
+    }
 
 
 

@@ -1,5 +1,6 @@
 /**
- * @author Glavin Wiechert
+ * The Blackjacker application
+ * @author Glavin Wiechert & Dylan Meijer & Faisal K. AlMazroa
  *
  */
 public class App 
@@ -21,10 +22,10 @@ public class App
         // Card Counting
 
         CounterView cView = new CounterView(new Counter(game));
-        
+
         game.resetGame();
         //game.notifyViews();
-        
+
 
     }
 

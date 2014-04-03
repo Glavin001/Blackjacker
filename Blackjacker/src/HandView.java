@@ -8,56 +8,62 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * @author Glavin Wiechert and Faisal K Al Mazroa A.K.A ./~Saudi Coder 
- *
+ * The Hand model's view.
+ * @author Glavin Wiechert & Dylan Meijer & Faisal K. AlMazroa
  */
 public class HandView extends JPanel implements View
 {
-	/**
-	 * 
-	 */
-	private Hand hand;
-	
-	/**
-	 * 
-	 * @param h
-	 */
-	public HandView(Hand h)
-	{
-		this.setLayout(new FlowLayout(FlowLayout.LEFT));
+    /**
+     * The hand.
+     */
+    private Hand hand;
 
-		
-		hand = h;
-		h.registerView(this);
-	}
+    /**
+     * Constructor
+     * @param h
+     */
+    public HandView(Hand h)
+    {
+        this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
 
-	public void drawItUp() 
-	{
-		this.removeAll();
-		// Display Hand Value
+        hand = h;
+        h.registerView(this);
+    }
+
+
+    /**
+     * Handle the model change event.
+     */
+    public void drawItUp() 
+    {
+        this.removeAll();
+        // Display Hand Value
         JLabel handLabel = new JLabel("Hand: "+hand.getValue());
         handLabel.setForeground(Color.WHITE);
-		this.add(handLabel);
-		// Display Cards
-		ArrayList<Card> cards = hand.getCards();
-		for (Card card : cards)
-		{
-			CardView temp = new CardView(card);
-			this.add(temp);
-		}
-		
-		//System.out.println("Cards " + hand.cardsInHand());
-		revalidate();
-		repaint(); 
-		
-	}
-	
+        this.add(handLabel);
+        // Display Cards
+        ArrayList<Card> cards = hand.getCards();
+        for (Card card : cards)
+        {
+            CardView temp = new CardView(card);
+            this.add(temp);
+        }
+
+        //System.out.println("Cards " + hand.cardsInHand());
+        revalidate();
+        repaint(); 
+
+    }
+
+    /**
+     * Paint to the view.
+     */
     public void paint(Graphics g)
     {
-    	//System.out.println("Paint Hand");
-    	super.paint(g);
-    	super.paintComponents(g);
+        //System.out.println("Paint Hand");
+        super.paint(g);
+        super.paintComponents(g);
 
     }
 

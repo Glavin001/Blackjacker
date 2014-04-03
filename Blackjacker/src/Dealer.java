@@ -1,9 +1,10 @@
-	import java.util.ArrayList;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 
 /**
- * @author Glavin Wiechert
+ * The Dealer model and logic.
+ * @author Glavin Wiechert & Dylan Meijer & Faisal K. AlMazroa
  *
  */
 public class Dealer extends Player 
@@ -15,33 +16,40 @@ public class Dealer extends Player
     private int minimumHandValue;
 
     /**
-     * 
+     * The deck.
      */
     private Deck deck;
 
     /**
-     * 
+     * All players.
      */
     private ArrayList<Player> players;
 
     /**
-     * 
+     * The current player.
      */
     private Player currentPlayer;
 
-
+    /**
+     * Constructor
+     * @param game
+     */
     public Dealer (Game game)
     {
         super(game);
     }
 
+    /**
+     * Get the deck.
+     * @return The deck.
+     */
     public Deck getDeck()
     {
         return deck;
     }
 
     /**
-     * 
+     * Get the next player.
      * @return	The next player.
      */
     public Player getNextPlayer()
@@ -51,8 +59,9 @@ public class Dealer extends Player
     }
 
     /**
-     * 
-     * @param player
+     * Deal a card to the player.
+     * @param player    The player to deal to.
+     * @param faceUp    If card is faceUp
      */
     public void dealCardToPlayer(Player player, boolean faceUp)
     {
@@ -66,14 +75,13 @@ public class Dealer extends Player
     }
 
     /**
-     * 
+     * Set the deck for this dealer to use.
      * @param newDeck
      */
     public void setDeck(Deck newDeck)
     {
         deck = newDeck;
         notifyViews();
-
     }
 
     /**
@@ -105,29 +113,36 @@ public class Dealer extends Player
         boolean hitAgain = true;
         for (Player p : game.getPlayers())
         {
-        	if (p != this)
-        		if (p.getHand().getValue()
-        				<= hand.getValue() )
+            if (p != this)
+                if (p.getHand().getValue()
+                        <= hand.getValue() )
                     hitAgain = false;
         }
         if (hitAgain) dealCardToPlayer(this, true);
     }
-    
- 
 
+
+
+    /**
+     * Request the moves of the players.
+     */
     public void requestMove()
     {
         makeMoves();
         game.resolveGame();
     }
-    
-	public void setLabels(String msg) 
-	{
-		for (View view: getViews())
-		{
-			if (view.getClass() == DealerView.class) 
-				((DealerView) view).getLabel().setText(msg);
-		}	
-	}
+
+    /**
+     * Set the text of the label to the message.
+     * @param msg   The message.
+     */
+    public void setLabels(String msg) 
+    {
+        for (View view: getViews())
+        {
+            if (view.getClass() == DealerView.class) 
+                ((DealerView) view).getLabel().setText(msg);
+        }	
+    }
 
 }

@@ -11,23 +11,19 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
 /**
- * 
- */
-
-/**
- * @author Dylan
- *
+ * Card model's viewer.
+ * @author Glavin Wiechert & Dylan Meijer & Faisal K. AlMazroa
  */
 public class CardView extends JComponent implements View
 {
 
     /**
-     * 
+     * Preferred size of component.
      */
     private Dimension preferredSize;
 
     /**
-     * 
+     * The card model.
      */
     private Card card;
 
@@ -56,6 +52,10 @@ public class CardView extends JComponent implements View
         return preferredSize;
     }
 
+    /**
+     * Get the image.
+     * @return The image for this card.
+     */
     private BufferedImage getImage()
     {
         ////System.out.println(card.getValue()+" "+card.getSuit());

@@ -11,41 +11,37 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
-/**
- * 
- */
-
 
 /**
- * @author s7113041
- *
+ * Counter's view class.
+ * @author Glavin Wiechert & Dylan Meijer & Faisal K. AlMazroa
  */
 public class CounterView  implements View
 {
 
-	/**
-	 * 
-	 */
-	private Counter counter;
-	
+    /**
+     * The counter logic class.
+     */
+    private Counter counter;
 
 
-	/**
-	 * 
-	 */
-	public CounterView(Counter counter)
-	{
-		this.counter = counter;
-		this.counter.registerView(this);
-	}
 
-	@Override
-	public void drawItUp() 
-	{
-		JOptionPane.showMessageDialog(counter.getGame()
-				.getGameView().getFrame()
-				, counter.getMessage());
+    /**
+     * Constructor
+     */
+    public CounterView(Counter counter)
+    {
+        this.counter = counter;
+        this.counter.registerView(this);
+    }
 
-	}
-	
+    @Override
+    public void drawItUp() 
+    {
+        JOptionPane.showMessageDialog(counter.getGame()
+                .getGameView().getFrame()
+                , counter.getMessage());
+
+    }
+
 }
